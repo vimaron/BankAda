@@ -20,7 +20,7 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
 
     @Override
     public List<AccountTypeDTO> findAll(int limit, int offset) {
-        String sql = "SELECT * FROM Continent LIMIT ? OFFSET ?";
+        String sql = "SELECT * FROM account_type LIMIT ? OFFSET ?";
         List<AccountTypeDTO> accountTypes = new ArrayList<>();
         try {
             Connection connection = DBConnection.getConnection();
@@ -42,7 +42,7 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
 
     @Override
     public AccountTypeDTO findById(Integer id) {
-        String sql = "SELECT * FROM Continent WHERE id = ?";
+        String sql = "SELECT * FROM account_type WHERE id = ?";
         AccountTypeDTO accountType = null;
         try {
             Connection connection = DBConnection.getConnection();
@@ -62,7 +62,7 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
 
     @Override
     public Boolean save(AccountTypeDTO accountTypeDTO) {
-        String sql = "INSERT INTO Continent (name) values (?)";
+        String sql = "INSERT INTO account_type (name) values (?)";
         int affectatedRows = 0;
         try {
             Connection connection = DBConnection.getConnection();
@@ -78,7 +78,7 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
 
     @Override
     public Boolean update(AccountTypeDTO accountTypeDTO, Integer id) {
-        String sql = "UPDATE Continent SET name = ? WHERE Id = ?";
+        String sql = "UPDATE account_type SET name = ? WHERE Id = ?";
         int hasUpdate = 0;
 
         //para comparar el objeto que quiero actualizar con la base de datos.
@@ -101,7 +101,7 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
 
     @Override
     public Boolean delete(Integer id) {
-        String sql = "DELETE FROM Continent WHERE Id = ?";
+        String sql = "DELETE FROM account_type WHERE Id = ?";
         int hasDelete = 0;
         try {
             Connection connection = DBConnection.getConnection();
