@@ -1,6 +1,7 @@
 package ar.com.ada.maven.model.dao;
 
 import ar.com.ada.maven.model.DBConnection;
+import ar.com.ada.maven.model.dto.AccountTypeDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,6 +39,11 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
         }
 
         return accountTypes;
+    }
+
+    @Override
+    public Collection<AccountTypeDTO> findAll() {
+        return null;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package ar.com.ada.maven.model.dao;
 
 import ar.com.ada.maven.model.DBConnection;
+import ar.com.ada.maven.model.dto.CustomerDTO;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ public class CustomerDAO implements Dao<CustomerDTO> {
 
     public CustomerDAO() {}
 
-    public CountryDAO (Boolean willCloseConnection) {
+    public CustomerDAO (Boolean willCloseConnection) {
         this.willCloseConnection = willCloseConnection;
     }
 
@@ -31,7 +32,7 @@ public class CustomerDAO implements Dao<CustomerDTO> {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 CustomerDTO customer = customerDAO.findById(rs.getInt("id_Continent"));
-                CountryDTO country = new CountryDTO(rs.getInt("id"), rs.getString("name"), rs.getInt("iso_cod"), continent);
+                CustomerDTO country = new CountryDTO(rs.getInt("id"), rs.getString("name"), rs.getInt("iso_cod"), continent);
                 countries.add(country);
             }
             connection.close();
