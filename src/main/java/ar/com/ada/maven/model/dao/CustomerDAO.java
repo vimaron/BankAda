@@ -1,6 +1,7 @@
 package ar.com.ada.maven.model.dao;
 
 import ar.com.ada.maven.model.DBConnection;
+import ar.com.ada.maven.model.dto.CustomerDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
