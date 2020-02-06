@@ -18,7 +18,7 @@ public class BankDAO implements Dao<BankDTO>{
     public BankDAO() {}
     public BankDAO(Boolean willCloseConnection){this.willCloseConnection = willCloseConnection;}
 
-    public Collection<BankDTO> findAll() {
+    public ArrayList<BankDTO> findAll() {
         String sql = "SELECT * FROM Bank";
         ArrayList<BankDTO> banks = new ArrayList<>();
         try {
@@ -56,5 +56,5 @@ public class BankDAO implements Dao<BankDTO>{
         }
         return bank;
     }
-    
+
 }
