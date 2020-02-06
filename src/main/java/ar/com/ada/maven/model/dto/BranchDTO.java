@@ -10,6 +10,13 @@ public class BranchDTO {
 
     public BranchDTO(){}
 
+    public BranchDTO(int id, String identificationCode, String name, BankDTO bankID) {
+        this.id=id;
+        this.identificationCode=identificationCode;
+        this.name=name;
+        this.bankID=bankID;
+    }
+
     public int getId(){return id;}
     public void setId(int id){this.id=id;}
     public String getIdentificationCode(){return identificationCode;}
