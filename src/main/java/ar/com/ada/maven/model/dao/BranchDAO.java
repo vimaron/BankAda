@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class BranchDAO implements Dao<BranchDTO> {
+public class BranchDAO {
     private Boolean willCloseConection = true;
 
     private BankDAO bankDAO = new BankDAO(false);
