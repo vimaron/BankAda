@@ -67,4 +67,3 @@ public class BranchDAO implements Dao<BranchDTO> {
         return branch;
     }
 
-}
