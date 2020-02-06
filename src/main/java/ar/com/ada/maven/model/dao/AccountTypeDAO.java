@@ -17,7 +17,7 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
 
     public AccountTypeDAO(Boolean willCloseConnection) {this.willCloseConnection = willCloseConnection;}
 
-    
+
     public List<AccountTypeDTO> findAll(int limit, int offset) {
         String sql = "SELECT * FROM account_type LIMIT ? OFFSET ?";
         List<AccountTypeDTO> accountTypes = new ArrayList<>();
