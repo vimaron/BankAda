@@ -1,7 +1,6 @@
 package ar.com.ada.maven.model.dao;
 
 import ar.com.ada.maven.model.DBConnection;
-import ar.com.ada.maven.model.dto.AccountTypeDTO;
 import ar.com.ada.maven.model.dto.CountryDTO;
 
 import java.sql.Connection;
@@ -9,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class CountryDAO implements Dao<CountryDTO>{
@@ -19,11 +17,10 @@ public class CountryDAO implements Dao<CountryDTO>{
     public CountryDAO(){}
     public CountryDAO(Boolean willCloseConnection) {this.willCloseConnection = willCloseConnection;}
 
-
     @Override
-    public Collection<CountryDTO> findAll(int limit, int offset) {
+    public ArrayList<CountryDTO> findAll(int limit, int offset) {
         String sql = "SELECT * FROM Country LIMIT ? OFFSET ?";
-        List<CountryDTO> countries = new ArrayList<>();
+        ArrayList<CountryDTO> countries = new ArrayList<>();
         try {
             Connection connection = DBConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

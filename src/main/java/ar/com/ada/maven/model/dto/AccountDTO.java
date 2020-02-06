@@ -13,6 +13,17 @@ public class AccountDTO{
 
     public AccountDTO(){}
 
+    public AccountDTO(int id, int number, double balance, String iban,
+                      CustomerDTO customerID, AccountTypeDTO accountType, BranchDTO branchID) {
+        this.id=id;
+        this.number=number;
+        this.balance=balance;
+        this.iban=iban;
+        this.customerID=customerID;
+        this.accountTypeID=accountType;
+        this.branchID=branchID;
+    }
+
     public int getId(){return id;}
     public void setId(int id){this.id=id;}
     public int getNumber(){return number;}
