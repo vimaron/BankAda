@@ -19,7 +19,7 @@ public class BankDAO implements Dao<BankDTO>{
     public BankDAO(Boolean willCloseConnection){this.willCloseConnection = willCloseConnection;}
 
     @Override
-    public Collection<BankDTO> findAll() {
+    public ArrayList<BankDTO> findAll() {
         String sql = "SELECT * FROM Bank";
         ArrayList<BankDTO> banks = new ArrayList<>();
         try {
@@ -29,7 +29,7 @@ public class BankDAO implements Dao<BankDTO>{
 
             while (rs.next()){
                 CountryDTO country = new CountryDAO.findById(rs.getInt("Country_id"));
-                BankDTO bank = new BankDTO(rs.getInt("id"), rs.getString("code"), rs.getString("name"));
+                BankDTO bank = new BankDTO(rs.getInt("id"), rs.getString("code"), rs.getString("name"), country);
                 banks.add(bank);
             }
             connection.close();
@@ -50,7 +50,7 @@ public class BankDAO implements Dao<BankDTO>{
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()){
                 CountryDTO country = countryDAO.findById(rs.getInt(Country_id));
-                bank = new BankDTO(rs.getInt("id"), rs.getString("code"), rs.getString("name"));
+                bank = new BankDTO(rs.getInt("id"), rs.getString("code"), rs.getString("name"), country);
             } if (willCloseConnection)
                 connection.close();
         } catch (Exception e){
