@@ -2,11 +2,9 @@ package ar.com.ada.maven.model.dao;
 
 import ar.com.ada.maven.model.DBConnection;
 import ar.com.ada.maven.model.dto.AccountTypeDTO;
+import ar.com.ada.maven.model.dto.CustomerDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +17,7 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
 
     public AccountTypeDAO(Boolean willCloseConnection) {this.willCloseConnection = willCloseConnection;}
 
-    @Override
+
     public List<AccountTypeDTO> findAll(int limit, int offset) {
         String sql = "SELECT * FROM account_type LIMIT ? OFFSET ?";
         List<AccountTypeDTO> accountTypes = new ArrayList<>();
@@ -39,6 +37,25 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
         }
 
         return accountTypes;
+    }
+
+    @Override
+    public Collection<AccountTypeDTO> findAll() {
+        String sql = "SELECT * FROM Account_type";
+        ArrayList<AccountTypeDTO> accountTypeDTOS = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                AccountTypeDTO accountTypeDTO = new AccountTypeDTO(rs.getInt("id"), rs.getString("name"));
+                accountTypeDTOS.add(accountTypeDTO);
+            }
+            connection.close();
+        } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+        return accountTypeDTOS;
     }
 
     @Override

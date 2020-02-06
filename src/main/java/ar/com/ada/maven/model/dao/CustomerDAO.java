@@ -68,7 +68,7 @@ public class CustomerDAO implements Dao<CustomerDTO> {
             preparedStatement.setString(1, customerDTO.getName());
             preparedStatement.setString(2, customerDTO.getLastName());
             preparedStatement.setString(3, customerDTO.getIdentificationType());
-            preparedStatement.setInt(customerDTO.getIdentification());
+            preparedStatement.setInt(4, customerDTO.getIdentification());
             affectatedRows = preparedStatement.executeUpdate();
             connection.close();
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
@@ -90,16 +90,16 @@ public class CustomerDAO implements Dao<CustomerDTO> {
             preparedStatement.setString(1, customerDTO.getName());
             preparedStatement.setString(2, customerDTO.getLastName());
             preparedStatement.setString(3, customerDTO.getIdentificationType());
-            preparedStatement.setInt(customerDTO.getIdentification());
+            preparedStatement.setInt(4, customerDTO.getIdentification());
 
             if (!(customerDTO.getName().equals(customerDB.getName()) &&
                     customerDTO.getLastName().equals(customerDB.getLastName()) &&
                     customerDTO.getIdentificationType().equals(customerDB.getIdentificationType()) &&
-                    customerDTO.getIdentification().equals(customerDB.getIdentification())));
+                    customerDTO.getIdentification() == (customerDB.getIdentification())));
             hasUpdate = preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
-            System.out.println("CONNECTION ERROR CITY update: " + e.getMessage());
+            System.out.println("CONNECTION ERROR Customer update: " + e.getMessage());
         }
         return hasUpdate == 1;
     }
@@ -115,7 +115,7 @@ public class CustomerDAO implements Dao<CustomerDTO> {
             preparedStatement.setInt(1, id);
             hasDelete = preparedStatement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("CONNECTION ERROR CITY delete: " + e.getMessage());
+            System.out.println("CONNECTION ERROR Customer delete: " + e.getMessage());
         }
         return hasDelete == 1;
     }
