@@ -11,6 +11,14 @@ public class CustomerDTO {
 
     public CustomerDTO(){}
 
+    public CustomerDTO(int id, String name, String lastName, String identificationType, int identification) {
+        this.id=id;
+        this.name=name;
+        this.lastName=lastName;
+        this.identificationType=identificationType;
+        this.identification=identification;
+    }
+
     public int getId(){return id;}
     public void setId(int id){this.id=id;}
     public String getName(){return name;}

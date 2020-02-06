@@ -12,6 +12,15 @@ public class TransactionDTO {
 
     public TransactionDTO(){}
 
+    public TransactionDTO(int id, Date date, double amount, AccountDTO accountID,
+                          TransactionTypeDTO transactionTypeID) {
+        this.id=id;
+        this.date=date;
+        this.amount= amount;
+        this.accountID=accountID;
+        this.transactionTypeID=transactionTypeID;
+    }
+
     public int getId(){return id;}
     public void setId(int id){this.id=id;}
     public Date getDate(){return date;}
