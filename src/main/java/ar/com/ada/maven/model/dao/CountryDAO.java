@@ -24,14 +24,12 @@ public class CountryDAO {
     }
 
 
-    public Collection<CountryDTO> findAll(int limit, int offset) {
+    public ArrayList<CountryDTO> findAll() {
         String sql = "SELECT * FROM Country LIMIT ? OFFSET ?";
-        List<CountryDTO> countries = new ArrayList<>();
+        ArrayList<CountryDTO> countries = new ArrayList<>();
         try {
             Connection connection = DBConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, limit);
-            preparedStatement.setInt(2, offset);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 CountryDTO country = new CountryDTO(rs.getInt("id"), rs.getString("name"));
