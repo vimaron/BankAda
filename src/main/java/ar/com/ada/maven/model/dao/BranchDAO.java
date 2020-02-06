@@ -89,7 +89,6 @@ public class BranchDAO implements Dao<BranchDTO>{
         BranchDTO branchDB = findById(id);
         try {
             Connection connection = DBConnection.getConnection();
-            Connection connection =DBConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, branchDTO.getIdentificationCode());
             preparedStatement.setString(2, branchDTO.getName());
