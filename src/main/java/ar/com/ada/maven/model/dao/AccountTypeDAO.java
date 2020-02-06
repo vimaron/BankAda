@@ -42,6 +42,11 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
     }
 
     @Override
+    public Collection<AccountTypeDTO> findAll() {
+        return null;
+    }
+
+    @Override
     public AccountTypeDTO findById(Integer id) {
         String sql = "SELECT * FROM account_type WHERE id = ?";
         AccountTypeDTO accountType = null;
