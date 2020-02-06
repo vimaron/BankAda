@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class BankDAO implements Dao<BankDTO>{
+public class BankDAO {
 
     private Boolean willCloseConnection = true;
 
