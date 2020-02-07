@@ -28,7 +28,7 @@ public class BankDAO {
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()){
-                CountryDTO country = new CountryDAO.findById(rs.getInt("Country_id"));
+                CountryDTO country = countryDAO.findById(rs.getInt("Country_id"));
                 BankDTO bank = new BankDTO(rs.getInt("id"), rs.getString("code"), rs.getString("name"), country);
                 banks.add(bank);
             }
@@ -48,7 +48,7 @@ public class BankDAO {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()){
-                CountryDTO country = countryDAO.findById(rs.getInt(Country_id));
+                CountryDTO country = countryDAO.findById(rs.getInt("Country_id"));
                 bank = new BankDTO(rs.getInt("id"), rs.getString("code"), rs.getString("name"), country);
             } if (willCloseConnection)
                 connection.close();
