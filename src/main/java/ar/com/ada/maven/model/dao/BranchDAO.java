@@ -4,7 +4,7 @@ import ar.com.ada.maven.model.DBConnection;
 import ar.com.ada.maven.model.dto.AccountDTO;
 import ar.com.ada.maven.model.dto.BankDTO;
 import ar.com.ada.maven.model.dto.BranchDTO;
-import com.sun.imageio.plugins.bmp.BMPMetadataFormatResources;
+
 
 import javax.print.DocFlavor;
 import java.sql.*;
@@ -66,4 +66,5 @@ public class BranchDAO {
         }
         return branch;
     }
+}
 
