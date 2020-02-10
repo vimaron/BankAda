@@ -1,5 +1,7 @@
 package ar.com.ada.maven.utils;
 
+import ar.com.ada.maven.view.MainView;
+
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
