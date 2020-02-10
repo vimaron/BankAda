@@ -6,13 +6,11 @@ import ar.com.ada.maven.model.dto.CountryDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class BankDAO {
 
     private Boolean willCloseConnection = true;
 
-    private BankDAO bankDAO = new BankDAO(false);
     private CountryDAO countryDAO = new CountryDAO(false);
 
     public BankDAO() {}

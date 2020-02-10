@@ -1,15 +1,13 @@
 package ar.com.ada.maven.model.dao;
 
-        import ar.com.ada.maven.model.DBConnection;
-        import ar.com.ada.maven.model.dto.AccountDTO;
-        import ar.com.ada.maven.model.dto.BankDTO;
-        import ar.com.ada.maven.model.dto.BranchDTO;
-        import com.sun.imageio.plugins.bmp.BMPMetadataFormatResources;
 
-        import javax.print.DocFlavor;
-        import java.sql.*;
-        import java.util.ArrayList;
-        import java.util.Collection;
+import ar.com.ada.maven.model.DBConnection;
+import ar.com.ada.maven.model.dto.BankDTO;
+import ar.com.ada.maven.model.dto.BranchDTO;
+
+import java.sql.*;
+import java.util.ArrayList;
+
 
 public class BranchDAO {
     private Boolean willCloseConection = true;
@@ -63,6 +61,6 @@ public class BranchDAO {
         }
         return branch;
     }
-
-
 }
+
+

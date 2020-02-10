@@ -63,7 +63,7 @@ public class TransactionTypeDAO {
         try {
             Connection connection = DBConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(transactionTypeDTO.getName());
+            preparedStatement.setString(1, transactionTypeDTO.getName());
             affectatedRows = preparedStatement.executeUpdate();
             connection.close();
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
