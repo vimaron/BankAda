@@ -8,6 +8,7 @@ import ar.com.ada.maven.model.dto.BranchDTO;
 import java.sql.*;
 import java.util.ArrayList;
 
+
 public class BranchDAO {
     private Boolean willCloseConection = true;
 
@@ -61,6 +62,5 @@ public class BranchDAO {
         return branch;
     }
 }
-
 
 
