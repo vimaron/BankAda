@@ -18,10 +18,14 @@ public class MainView {
                 int choice = key.nextInt();
                 return choice;
             } catch (InputMismatchException e){
-                System.out.println("El caracter ingresado es erroneo");
+                MainView.invalidData();
                 key.next();
             }
         }
+    }
+
+    public static void invalidData(){
+        System.out.println("ERROR :: El dato ingresado es erroneo");
     }
  }
 
