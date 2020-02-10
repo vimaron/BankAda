@@ -6,13 +6,11 @@ import ar.com.ada.maven.model.dto.CountryDTO;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class BankDAO {
 
     private Boolean willCloseConnection = true;
 
-    private BankDAO bankDAO = new BankDAO(false);
     private CountryDAO countryDAO = new CountryDAO(false);
 
     public BankDAO() {}
@@ -28,9 +26,9 @@ public class BankDAO {
             ResultSet rs = statement.executeQuery(sql);
 
             while (rs.next()){
-//                CountryDTO country = new CountryDAO.findById(rs.getInt("Country_id"));
-//                BankDTO bank = new BankDTO(rs.getInt("id"), rs.getString("code"), rs.getString("name"), country);
-//                banks.add(bank);
+                CountryDTO country = countryDAO.findById(rs.getInt("Country_id"));
+                BankDTO bank = new BankDTO(rs.getInt("id"), rs.getString("code"), rs.getString("name"), country);
+                banks.add(bank);
             }
             connection.close();
         } catch (InstantiationException |SQLException | IllegalAccessException | ClassNotFoundException e) {
@@ -48,8 +46,8 @@ public class BankDAO {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()){
-//                CountryDTO country = countryDAO.findById(rs.getInt(Country_id));
-//                bank = new BankDTO(rs.getInt("id"), rs.getString("code"), rs.getString("name"), country);
+                CountryDTO country = countryDAO.findById(rs.getInt("Country_id"));
+                bank = new BankDTO(rs.getInt("id"), rs.getString("code"), rs.getString("name"), country);
             } if (willCloseConnection)
                 connection.close();
         } catch (Exception e){
