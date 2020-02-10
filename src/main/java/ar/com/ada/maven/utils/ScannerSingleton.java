@@ -44,7 +44,7 @@ public class ScannerSingleton {
         }
     }
 
-    public static int getInputInteger(){
+    public static String getInputInteger(){
         Scanner keyboard = getInstance();
         while (true){
             try{
@@ -54,7 +54,7 @@ public class ScannerSingleton {
                     MainView.invalidData();
                     entero = keyboard.nextLine();
                 }
-                return entero
+                return entero;
             } catch (InputMismatchException e){
                 MainView.invalidData();
                 keyboard.next();
