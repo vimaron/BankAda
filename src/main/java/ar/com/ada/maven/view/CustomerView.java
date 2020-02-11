@@ -1,8 +1,10 @@
 package ar.com.ada.maven.view;
 
+import ar.com.ada.maven.model.dto.CustomerDTO;
 import ar.com.ada.maven.utils.ScannerSingleton;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class CustomerView {
@@ -24,5 +26,14 @@ public class CustomerView {
         }
     }
 
+    public void printAllCustomers(List<CustomerDTO> customers){
+        System.out.println("Listado de clientes: ");
+        customers.forEach(customer -> {
+            String customerName = customer.getName();
+            int customerId = customer.getId();
+            System.out.println("Cliente [id:  " + customerId + " y nombre: " + customerName + "]");
+        });
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
 
 }
