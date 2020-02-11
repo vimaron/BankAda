@@ -10,9 +10,9 @@ public class MainController {
         while (!bool){
             int varWhile = view.selectOption();
             switch (varWhile){
-                case 1: ClientController.init();
+                case 1: CustomerController.init();
                 break;
-                case 2: AccountController.init();
+                case 2: ;
                 break;
                 case 3: bool = true;
                 break;
