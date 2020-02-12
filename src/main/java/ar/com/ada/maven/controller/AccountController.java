@@ -5,6 +5,7 @@ import ar.com.ada.maven.model.dao.AccountTypeDAO;
 import ar.com.ada.maven.model.dao.BranchDAO;
 import ar.com.ada.maven.model.dao.CustomerDAO;
 import ar.com.ada.maven.model.dto.AccountDTO;
+import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.view.AccountView;
 import ar.com.ada.maven.view.MainView;
 
