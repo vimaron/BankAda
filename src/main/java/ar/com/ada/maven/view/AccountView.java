@@ -14,7 +14,7 @@ public class AccountView {
 
     private Scanner keyboard = ScannerSingleton.getInstance();
 
-    public String accountMenuSelectedOption() {
+    public Integer accountMenuSelectedOption() {
         System.out.println("\n+----------------------------------------+");
         System.out.println("\t\t BANK ADA APP :: Modulo Cuentas");
         System.out.println("+----------------------------------------+\n");
@@ -26,7 +26,7 @@ public class AccountView {
         System.out.println("| 4 | Regresar al menú principal");
         System.out.println("-------------------------\n");
 
-        return ScannerSingleton.getInputInteger();
+        return Integer.valueOf(ScannerSingleton.getInputInteger());
 
     }
 
@@ -110,7 +110,7 @@ public class AccountView {
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
-    public String customerIdSelected(String actionOption) {
+    public Integer customerIdSelected(String actionOption) {
         switch (actionOption) {
             case Paginator.EDITH:
                 actionOption = "editar";
@@ -124,7 +124,7 @@ public class AccountView {
         }
         System.out.println("Ingrese el numero de ID del cliente para " + actionOption + " ó 0 para cancelar: \n");
 
-        return ScannerSingleton.getInputInteger();
+        return Integer.valueOf( ScannerSingleton.getInputInteger());
     }
 
     public Boolean getResponseToDelete(AccountDTO account) {

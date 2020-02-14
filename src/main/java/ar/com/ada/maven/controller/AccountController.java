@@ -23,7 +23,7 @@ public class AccountController {
         boolean shouldGetOut = false;
 
         while (!shouldGetOut) {
-            int option = view.accountMenuSelectedOption();
+            String option = view.accountMenuSelectedOption();
             switch (option) {
                 case 1:
                     listAllAccounts();
@@ -41,7 +41,7 @@ public class AccountController {
                     shouldGetOut = true;
                     break;
                 default:
-                    MainView.chososeValidOption(); //revisar este metodo
+                    MainView.chooseValidOption(); //revisar este metodo
             }
         }
     }
@@ -66,11 +66,50 @@ public class AccountController {
             paginator = Paginator.buildPaginator(currentPage, totalPages);
 
             accounts = accountDAO.findAll(limit, currentPage * limit);
-            String choice = view.printAccountsPerPage(accounts, paginator, optionSelectEdithOrDelete, showHeader);
+            String choice = view.printCustomerPerPage(accounts, paginator, optionSelectEdithOrDelete, showHeader);
 
+            switch (choice) {
+                case "i":
+                case "I":
+                    currentPage = 0;
+                    break;
+                case "a":
+                case "A":
+                    if (currentPage > 0) currentPage--;
+                    break;
+                case "s":
+                case "S":
+                    if (currentPage + 1 < totalPages) currentPage++;
+                    break;
+                case "u":
+                case "U":
+                    currentPage = totalPages - 1;
+                    break;
+                case "e":
+                case "E":
+                    if (optionSelectEdithOrDelete != null) {
+                        customerIdSelected = view.customerIdSelected(optionSelectEdithOrDelete);
+                        shouldGetOut = true;
+                    }
+                    break;
+                case "q":
+                case "Q":
+                    shouldGetOut = true;
+                    break;
+                default:
+                    if (choice.matches("^-?\\d+$")) {
+                        int page = Integer.parseInt(choice);
+                        if (page > 0 && page <= totalPages) currentPage = page - 1;
+                    } else MainView.chooseValidOption();
+            }
 
         }
+        return customerIdSelected;
     }
+
+
+
+}
 
 
 

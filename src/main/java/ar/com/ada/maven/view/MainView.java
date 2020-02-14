@@ -1,5 +1,6 @@
 package ar.com.ada.maven.view;
 
+import ar.com.ada.maven.utils.Ansi;
 import ar.com.ada.maven.utils.ScannerSingleton;
 
 import java.util.InputMismatchException;
@@ -26,6 +27,12 @@ public class MainView {
 
     public static void invalidData(){
         System.out.println("ERROR :: El dato ingresado es erroneo");
+    }
+
+    public static void chooseValidOption() {
+        System.out.println(Ansi.RED);
+        System.out.println("Error, debe ingresar una opcion valida");
+        System.out.println(Ansi.RESET);
     }
  }
 
