@@ -13,6 +13,9 @@ public class AccountDTO{
 
     public AccountDTO(){}
 
+    public AccountDTO(int i, int number, double balance, String iban) {
+    }
+
     public int getId(){return id;}
     public void setId(int id){this.id=id;}
     public int getNumber(){return number;}
