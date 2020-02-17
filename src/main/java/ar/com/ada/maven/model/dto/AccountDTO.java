@@ -3,7 +3,7 @@ package ar.com.ada.maven.model.dto;
 import java.util.Objects;
 
 public class AccountDTO{
-    private int id;
+    private Integer id;
     private int number;
     private double balance;
     private String iban;
@@ -28,7 +28,7 @@ public class AccountDTO{
 
     }
 
-    public int getId(){return id;}
+    public Integer getId(){return id;}
     public void setId(int id){this.id=id;}
     public int getNumber(){return number;}
     public void setNumber(int number){this.number=number;}
