@@ -15,6 +15,11 @@ public class AccountDTO{
 
 
     public AccountDTO(int i, int number, double balance, String iban) {
+        this.id=id;
+        this.number=number;
+        this.balance=balance;
+        this.iban=iban;
+    }
 
     public AccountDTO(int id, int number, double balance, String iban,
                       CustomerDTO customerID, AccountTypeDTO accountType, BranchDTO branchID) {
