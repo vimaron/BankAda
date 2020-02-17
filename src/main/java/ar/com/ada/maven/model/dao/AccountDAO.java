@@ -46,6 +46,7 @@ public class AccountDAO implements Dao<AccountDTO> {
 
     public AccountDTO getLastAccount() {
         String sql = "SELECT * FROM Account ORDER BY id DESC limit 1";
+        
         try {
             Connection connection = DBConnection.getConnection();
             Statement statement = connection.createStatement();
@@ -57,7 +58,7 @@ public class AccountDAO implements Dao<AccountDTO> {
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             System.out.println("CONNECTION ERROR: " + e.getMessage());
         }
-        return accgount;
+        return account;
 
 
     }
