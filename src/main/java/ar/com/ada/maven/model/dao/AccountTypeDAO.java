@@ -1,11 +1,10 @@
 package ar.com.ada.maven.model.dao;
 
 import ar.com.ada.maven.model.DBConnection;
+import ar.com.ada.maven.model.dto.AccountTypeDTO;
+import ar.com.ada.maven.model.dto.CustomerDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,9 +17,9 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
 
     public AccountTypeDAO(Boolean willCloseConnection) {this.willCloseConnection = willCloseConnection;}
 
-    @Override
+
     public List<AccountTypeDTO> findAll(int limit, int offset) {
-        String sql = "SELECT * FROM Continent LIMIT ? OFFSET ?";
+        String sql = "SELECT * FROM account_type LIMIT ? OFFSET ?";
         List<AccountTypeDTO> accountTypes = new ArrayList<>();
         try {
             Connection connection = DBConnection.getConnection();
@@ -41,8 +40,27 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
     }
 
     @Override
+    public Collection<AccountTypeDTO> findAll() {
+        String sql = "SELECT * FROM Account_type";
+        ArrayList<AccountTypeDTO> accountTypeDTOS = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                AccountTypeDTO accountTypeDTO = new AccountTypeDTO(rs.getInt("id"), rs.getString("name"));
+                accountTypeDTOS.add(accountTypeDTO);
+            }
+            connection.close();
+        } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+        return accountTypeDTOS;
+    }
+
+    @Override
     public AccountTypeDTO findById(Integer id) {
-        String sql = "SELECT * FROM Continent WHERE id = ?";
+        String sql = "SELECT * FROM account_type WHERE id = ?";
         AccountTypeDTO accountType = null;
         try {
             Connection connection = DBConnection.getConnection();
@@ -62,7 +80,7 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
 
     @Override
     public Boolean save(AccountTypeDTO accountTypeDTO) {
-        String sql = "INSERT INTO Continent (name) values (?)";
+        String sql = "INSERT INTO account_type (name) values (?)";
         int affectatedRows = 0;
         try {
             Connection connection = DBConnection.getConnection();
@@ -78,7 +96,7 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
 
     @Override
     public Boolean update(AccountTypeDTO accountTypeDTO, Integer id) {
-        String sql = "UPDATE Continent SET name = ? WHERE Id = ?";
+        String sql = "UPDATE account_type SET name = ? WHERE Id = ?";
         int hasUpdate = 0;
 
         //para comparar el objeto que quiero actualizar con la base de datos.
@@ -101,7 +119,7 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
 
     @Override
     public Boolean delete(Integer id) {
-        String sql = "DELETE FROM Continent WHERE Id = ?";
+        String sql = "DELETE FROM account_type WHERE Id = ?";
         int hasDelete = 0;
         try {
             Connection connection = DBConnection.getConnection();
