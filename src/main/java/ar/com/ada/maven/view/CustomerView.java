@@ -70,7 +70,6 @@ public class CustomerView {
 
 
 
-
     public void showNewCustomer(String name) {
         System.out.println("El cliente " + name + " se ha creado exitosamente");
         ScannerSingleton.pressEnterKeyToContinue();
