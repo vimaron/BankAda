@@ -7,8 +7,12 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class TransactionDAO {
+    //clase sin interface
 
     private Boolean willCloseConnection = true;
+
+    private AccountDAO accountDAO = new AccountDAO(false);
+    private TransactionTypeDAO transactionTypeDAO = new TransactionTypeDAO(false);
 
     public TransactionDAO() {
     }
@@ -25,8 +29,8 @@ public class TransactionDAO {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                AccountDTO account = rs.findById(rs.getInt("Account_id"));
-                TransactionTypeDTO transactionType = rs.findById(rs.getInt("Transaction_Type"));
+                AccountDTO account = accountDAO.findById(rs.getInt("Account_id"));
+                TransactionTypeDTO transactionType = transactionTypeDAO.findById(rs.getInt("Transaction_Type"));
                 TransactionDTO transaction = new TransactionDTO(rs.getInt("id"), rs.getDate("date"), rs.getDouble("amount"), account, transactionType);
                 transactions.add(transaction);
             }
@@ -45,11 +49,11 @@ public class TransactionDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next())
-                AccountDTO account = rs.findById(rs.getInt("Account_id"));
-            TransactionTypeDTO transactionType = rs.findById(rs.getInt("Transaction_Type"));
-            transaction = new TransactionDTO(rs.getInt("id"), rs.getDate("date"), rs.getDouble("amount"), account, transactionType);
-            if (willCloseConnection)
+            if (rs.next()) {
+                AccountDTO account = accountDAO.findById(rs.getInt("Account_id"));
+                TransactionTypeDTO transactionType = transactionTypeDAO.findById(rs.getInt("Transaction_Type"));
+                transaction = new TransactionDTO(rs.getInt("id"), rs.getDate("date"), rs.getDouble("amount"), account, transactionType);
+            } if (willCloseConnection)
                 connection.close();
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
             ex.printStackTrace();
@@ -65,10 +69,10 @@ public class TransactionDAO {
             Connection connection = DBConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             Date date = new Date(transactionDTO.getDate().getTime());
-            preparedStatement.setDate(date);
-            preparedStatement.setDouble(transactionDTO.getAmount());
-            preparedStatement.setInt(transactionDTO.getAccountID().getId());
-            preparedStatement.setInt(transactionDTO.getTransactionTypeID().getId());
+            preparedStatement.setDate(1, date);
+            preparedStatement.setDouble(2, transactionDTO.getAmount());
+            preparedStatement.setInt(3, transactionDTO.getAccountID().getId());
+            preparedStatement.setInt(4, transactionDTO.getTransactionTypeID().getId());
             affectatedRows = preparedStatement.executeUpdate();
             connection.close();
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
