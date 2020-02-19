@@ -10,6 +10,13 @@ public class CustomerDTO {
     private int identification;
 
     public CustomerDTO(){}
+    public CustomerDTO(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
+    public CustomerDTO(String name){
+        this.name = name;
+    }
 
     public CustomerDTO(int id, String name, String lastName, String identificationType, int identification) {
         this.id=id;

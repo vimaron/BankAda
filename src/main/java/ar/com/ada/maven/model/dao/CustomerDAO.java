@@ -6,6 +6,7 @@ import ar.com.ada.maven.model.dto.CustomerDTO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class CustomerDAO implements Dao<CustomerDTO> {
 
@@ -119,4 +120,6 @@ public class CustomerDAO implements Dao<CustomerDTO> {
         }
         return hasDelete == 1;
     }
+
+
 }
