@@ -119,4 +119,24 @@ public class CustomerDAO implements Dao<CustomerDTO> {
         }
         return hasDelete == 1;
     }
+
+    public CustomerDTO findByName(String name) {
+        String sql = "SELECT * FROM Customer WHERE name = ?";
+        CustomerDTO customer = null;
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next())
+                customer = new CustomerDTO(rs.getInt("id"), rs.getString("name"));
+
+            if (willCloseConnection) connection.close();
+        } catch (Exception e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+
+        return customer;
+    }
+
 }
