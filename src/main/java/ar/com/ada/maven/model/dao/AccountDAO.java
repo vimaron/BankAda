@@ -6,6 +6,7 @@ import ar.com.ada.maven.model.dto.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class AccountDAO implements Dao<AccountDTO> {
 
@@ -19,6 +20,48 @@ public class AccountDAO implements Dao<AccountDTO> {
 
     public AccountDAO(Boolean willCloseConnection) {this.willCloseConnection = willCloseConnection;}
 
+    public ArrayList<AccountDTO> findAll(int limit, int offset) {
+        String sql = "SELECT * FROM Account LIMIT ? OFFSET ?";
+        ArrayList<AccountDTO> accounts = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, limit);
+            preparedStatement.setInt(2, offset);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                CustomerDTO customer = customerDAO.findById(rs.getInt("Customer_id"));
+                AccountTypeDTO accountType = accountTypeDAO.findById(rs.getInt("Account_type_id"));
+                BranchDTO branch = branchDAO.findById(rs.getInt("Branch_id"));
+                AccountDTO account = new AccountDTO(rs.getInt("id"), rs.getInt("number"), rs.getDouble("balance"), rs.getString("iban"), customer, accountType, branch);
+                accounts.add(account);
+            }
+            connection.close();
+        } catch (Exception e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+
+        return accounts;
+    }
+
+    public AccountDTO getLastAccount() {
+        String sql = "SELECT * FROM Account ORDER BY id DESC limit 1";
+        AccountDTO account = null;
+        try {
+            Connection connection = DBConnection.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            if (rs.next()) {
+                account = new AccountDTO(rs.getInt("id"), rs.getInt("number"), rs.getDouble("balance"), rs.getString("iban"));
+            } if (willCloseConnection)
+                connection.close();
+        } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+        return account;
+
+
+    }
     @Override
     public ArrayList<AccountDTO> findAll() {
         String sql = "SELECT * FROM Account";
