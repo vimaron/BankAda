@@ -1,6 +1,7 @@
 package ar.com.ada.maven.view;
 
 import ar.com.ada.maven.model.dto.CustomerDTO;
+import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.utils.ScannerSingleton;
 import jdk.internal.jline.internal.Ansi;
 
@@ -53,7 +54,7 @@ public class CustomerView {
 
     public int customerIdSelected(String actionOption) {
         switch (actionOption) {
-            case Paginator.EDIT:
+            case Paginator.EDITH:
                 actionOption = "editar";
                 break;
             case Paginator.DELETE:

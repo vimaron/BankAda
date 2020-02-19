@@ -2,6 +2,7 @@ package ar.com.ada.maven.controller;
 
 import ar.com.ada.maven.model.dao.CustomerDAO;
 import ar.com.ada.maven.model.dto.CustomerDTO;
+import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.view.CustomerView;
 import ar.com.ada.maven.view.MainView;
 import jdk.internal.jline.internal.Ansi;
@@ -51,7 +52,7 @@ public class CustomerController {
     }
 
     private static void deleteCustomer() {
-        String optionDelete = "[" + Ansi.CYAN + "E" + Ansi.RESET + "liminar]";
+        String optionDelete = "[Eliminar]";
         int customertIdToDelete = listCustomersPerPage(optionDelete, true);
         if (customertIdToDelete != 0)
             deleteSelectedCustomer(customertIdToDelete);
