@@ -135,9 +135,9 @@ public class CustomerDAO implements Dao<CustomerDTO> {
             if (willCloseConnection) connection.close();
         } catch (Exception e) {
             System.out.println("CONNECTION ERROR: " + e.getMessage());
-        return customer;
 
         }
+        return customer;
     }
 
 }

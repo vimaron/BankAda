@@ -53,9 +53,9 @@ public class CustomerController {
 
     private static void deleteCustomer() {
         String optionDelete = "[Eliminar]";
-        int customertIdToDelete = listCustomersPerPage(optionDelete, true);
-        if (customertIdToDelete != 0)
-            deleteSelectedCustomer(customertIdToDelete);
+        int customerIdToDelete = listCustomersPerPage(optionDelete, true);
+        if (customerIdToDelete != 0)
+            deleteSelectedCustomer(customerIdToDelete);
         else
             view.updateCustomerCanceled();
     }
@@ -119,9 +119,9 @@ public class CustomerController {
         CustomerDTO customerById = customerDAO.findById(id);
         if (customerById !=null){
             view.getUpdate(customerById);
-            int identificationUpdate = view.identificationToUpdate(customerById);
-            if (!identificationUpdate.isEmpty()){
-            customerDAO.findByName(identificationUpdate);
+            Integer identificationUpdate = view.identificationToUpdate(customerById);
+            if (identificationUpdate != null){
+            customerDAO.findById(identificationUpdate);
             customerById.setIdentification(identificationUpdate);
 
                 Boolean isSaved = customerDAO.update(customerById, id);
@@ -167,7 +167,7 @@ public class CustomerController {
         while (!shouldGetOut) {
             totalCustomers = customerDAO.getTotalCustomers(); //crear metodo en customerDAO
             totalPages = (int) Math.ceil((double) totalCustomers / limit);
-            paginator = Paginator.buildPaginator(currentPage, totalPages); //importar cambios de develor e importar clase
+            paginator = Paginator.buildPaginator(currentPage, totalPages); 
 
             customers = customerDAO.findAll(limit, currentPage * limit);
             String choice = view.printCustomersPerPage(customers, paginator, optionSelectEdithOrDelete, showHeader);
