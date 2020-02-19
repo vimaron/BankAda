@@ -19,6 +19,10 @@ public class CustomerDTO {
         this.identification=identification;
     }
 
+    public CustomerDTO(String name){
+        this.name = name;
+    }
+
     public CustomerDTO(int id, String name) {
         this.id = id;
         this.name = name;
