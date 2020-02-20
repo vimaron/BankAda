@@ -40,6 +40,28 @@ public class CustomerController {
     }
 
     private static void createNewCustomer() {
+        String customerName = view.getNameNewContinent();
+        String customerLastName = view.getNewLastName();
+        String customerIdType = view.getNewIdType();
+        Integer customerIdentification = view.getNewIdentification();
+
+        if (!customerName.isEmpty() && !customerLastName.isEmpty() && !customerIdType.isEmpty()
+                && customerIdentification != null) {
+
+            CustomerDTO newCust = new CustomerDTO(customerName, customerLastName, customerIdType, customerIdentification);
+            CustomerDTO byName = customerDAO.findByName(customerIdentification);
+
+            if (byName != null && byName.equals(newCust)) {
+                view.customerAlreadyExists(newCust.getName());
+            } else {
+                Boolean isSaved = customerDAO.save(newCust);
+
+                if (isSaved)
+                    view.showNewCustomer(newCust.getName());
+            }
+        } else {
+            view.newCustomerCanceled();
+        }
 
     }
 

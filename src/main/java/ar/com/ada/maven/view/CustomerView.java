@@ -69,7 +69,22 @@ public class CustomerView {
         return Integer.valueOf( ScannerSingleton.getInputInteger());
     }
 
-
+    public String getNameNewContinent(){
+        System.out.println("Ingresar el nombre del nuevo cliente: ");
+        return String.valueOf( ScannerSingleton.getInputString());
+    }
+    public String getNewLastName(){
+        System.out.println("Ingresar el apellido: ");
+        return String.valueOf( ScannerSingleton.getInputString());
+    }
+    public String getNewIdType(){
+        System.out.println("Ingresar el tipo de identificacion: ");
+        return String.valueOf( ScannerSingleton.getInputString());
+    }
+    public Integer getNewIdentification(){
+        System.out.println("Ingrese el numero de identificacion: ");
+        return Integer.valueOf( ScannerSingleton.getInputInteger());
+    }
 
     public void showNewCustomer(String name) {
         System.out.println("El cliente " + name + " se ha creado exitosamente");
