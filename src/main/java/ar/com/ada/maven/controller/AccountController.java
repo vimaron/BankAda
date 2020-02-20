@@ -68,8 +68,7 @@ public class AccountController {
                 account.getBranchID().getBankID().getCountryID().getCode() + dc +
                         account.getBranchID().getBankID().getCode() +
                         account.getBranchID().getIdentificationCode() + dc1 + newNumber;
-
-        if (!preIban.isEmpty()) {
+        
             view.choiceCustomerIdInfo();
 
             Integer customerId = CustomerController.listCustomersPerPage(Paginator.SELECT, false);
