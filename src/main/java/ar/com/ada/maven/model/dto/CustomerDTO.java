@@ -10,6 +10,10 @@ public class CustomerDTO {
     private Integer identification;
 
     public CustomerDTO(){}
+    public CustomerDTO(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
 
     public CustomerDTO(int id, String name, String lastName, String identificationType, Integer identification) {
         this.id=id;
@@ -28,11 +32,11 @@ public class CustomerDTO {
     public CustomerDTO(String name){
         this.name = name;
     }
-
-    public CustomerDTO(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public CustomerDTO(int id, Integer identification){
+        this.identification = identification;
+        this.id=id;
     }
+
 
     public int getId(){return id;}
     public void setId(int id){this.id=id;}

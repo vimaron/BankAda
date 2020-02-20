@@ -6,6 +6,7 @@ import ar.com.ada.maven.model.dto.CustomerDTO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class CustomerDAO implements Dao<CustomerDTO> {
 
@@ -134,8 +135,8 @@ public class CustomerDAO implements Dao<CustomerDTO> {
             if (willCloseConnection) connection.close();
         } catch (Exception e) {
             System.out.println("CONNECTION ERROR: " + e.getMessage());
-        }
 
+        }
         return customer;
     }
 
