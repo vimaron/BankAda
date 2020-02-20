@@ -46,20 +46,22 @@ public class AccountDAO implements Dao<AccountDTO> {
 
     public AccountDTO getLastAccount() {
         String sql = "SELECT * FROM Account ORDER BY id DESC limit 1";
-        
+        AccountDTO account = null;
         try {
             Connection connection = DBConnection.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             if (rs.next()) {
-                AccountDTO account = new AccountDTO(rs.getInt("id"), rs.getInt("number"), rs.getDouble("balance"), rs.getString("iban"));
+                account = new AccountDTO(rs.getInt("id"), rs.getInt("number"), rs.getDouble("balance"), rs.getString("iban"));
             } if (willCloseConnection)
                 connection.close();
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             System.out.println("CONNECTION ERROR: " + e.getMessage());
         }
         return account;
+
     }
+
 
     public int getTotalAccounts() {
         String sql = "SELECT COUNT(*) AS total FROM Account";

@@ -1,5 +1,8 @@
 package ar.com.ada.maven.utils;
 
+import ar.com.ada.maven.model.dto.AccountTypeDTO;
+import ar.com.ada.maven.model.dto.CustomerDTO;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -83,5 +86,8 @@ public class CommandLineTable {
             }
         }
         System.out.println();
+    }
+
+    public void addRow(String toString, int number, double balance, String iban, CustomerDTO customerID, AccountTypeDTO accountTypeID) {
     }
 }
