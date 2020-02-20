@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class AccountDTO{
     private Integer id;
-    private int number;
-    private double balance;
+    private String number;
+    private Double balance;
     private String iban;
     private CustomerDTO customerID;
     private AccountTypeDTO accountTypeID;
@@ -14,14 +14,14 @@ public class AccountDTO{
     public AccountDTO(){}
 
 
-    public AccountDTO(int i, int number, double balance, String iban) {
+    public AccountDTO(int i, String number, Double balance, String iban) {
         this.id=id;
         this.number=number;
         this.balance=balance;
         this.iban=iban;
     }
 
-    public AccountDTO(int id, int number, double balance, String iban,
+    public AccountDTO(int id, String number, Double balance, String iban,
                       CustomerDTO customerID, AccountTypeDTO accountType, BranchDTO branchID) {
         this.id=id;
         this.number=number;
@@ -33,12 +33,21 @@ public class AccountDTO{
 
     }
 
+    public AccountDTO(String number, Double balance, String iban, CustomerDTO customerID, AccountTypeDTO accountTypeID, BranchDTO branchID) {
+        this.number = number;
+        this.balance = balance;
+        this.iban = iban;
+        this.customerID = customerID;
+        this.accountTypeID = accountTypeID;
+        this.branchID = branchID;
+    }
+
     public Integer getId(){return id;}
     public void setId(int id){this.id=id;}
-    public int getNumber(){return number;}
-    public void setNumber(int number){this.number=number;}
-    public double getBalance(){return balance;}
-    public void setBalance(double balance){this.balance=balance;}
+    public String getNumber(){return number;}
+    public void setNumber(String number){this.number=number;}
+    public Double getBalance(){return balance;}
+    public void setBalance(Double balance){this.balance=balance;}
     public String getIban(){return iban;}
     public void setIban(String iban){this.iban=iban;}
     public CustomerDTO getCustomerID(){return customerID;}
