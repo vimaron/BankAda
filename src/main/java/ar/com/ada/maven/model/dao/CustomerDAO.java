@@ -155,5 +155,23 @@ public class CustomerDAO implements Dao<CustomerDTO> {
 
         return total;
     }
+    public CustomerDTO findByIdentification(Integer identification) {
+        String sql = "SELECT * FROM Customer WHERE identification = ?";
+        CustomerDTO customer = null;
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, identification);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next())
+                customer = new CustomerDTO(rs.getInt("id"), rs.getInt("identification"));
+
+            if (willCloseConnection) connection.close();
+        } catch (Exception e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+
+        return customer;
+    }
 
 }
