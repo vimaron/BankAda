@@ -32,6 +32,13 @@ public class CustomerDTO {
         this.identification = identification;
     }
 
+    public CustomerDTO(String name){
+        this.name = name;
+    }
+    public CustomerDTO(int id, Integer identification){
+        this.identification = identification;
+        this.id=id;
+    }
 
 
     public int getId(){return id;}
