@@ -49,7 +49,7 @@ public class CustomerController {
                 && customerIdentification != null) {
 
             CustomerDTO newCust = new CustomerDTO(customerName, customerLastName, customerIdType, customerIdentification);
-            CustomerDTO byName = customerDAO.findByName(customerIdentification);
+            CustomerDTO byName = customerDAO.findByIdentification(customerIdentification);
 
             if (byName != null && byName.equals(newCust)) {
                 view.customerAlreadyExists(newCust.getName());

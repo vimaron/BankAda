@@ -102,7 +102,7 @@ public class CustomerView {
 
     public static void getUpdate(CustomerDTO customer) {
         System.out.print("Se actualizará el siguiente cliente: ");
-        System.out.println(Ansi.PURPLE + customer.getId() + "\t" + customer.getName() + Ansi.RESET + "\t" +
+        System.out.println( customer.getId() + "\t" + customer.getName() + "\t" +
                 customer.getLastName() + "\t" + customer.getIdentificationType() + "\t" + customer.getIdentification());
 
     }
@@ -157,7 +157,7 @@ public class CustomerView {
 
     public static Boolean getResponseToDelete(CustomerDTO customer){
         System.out.print("Se Eliminará el siguiente cliente: ");
-        System.out.println(Ansi.PURPLE + customer.getId() + " " + customer.getName() + Ansi.RESET);
+        System.out.println( customer.getId() + " " + customer.getName());
 
         System.out.println("Esta seguro que desea eliminarlo? ");
         System.out.println("| 1 | Si");
