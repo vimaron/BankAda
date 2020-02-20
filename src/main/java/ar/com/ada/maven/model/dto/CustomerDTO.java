@@ -28,6 +28,10 @@ public class CustomerDTO {
     public CustomerDTO(String name){
         this.name = name;
     }
+    public CustomerDTO(int id, Integer identification){
+        this.id=id;
+        this.identification = identification;
+    }
 
     public CustomerDTO(int id, String name) {
         this.id = id;
