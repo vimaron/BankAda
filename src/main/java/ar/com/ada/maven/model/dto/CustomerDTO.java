@@ -7,7 +7,7 @@ public class CustomerDTO {
     private String name;
     private String lastName;
     private String identificationType;
-    private int identification;
+    private Integer identification;
 
     public CustomerDTO(){}
     public CustomerDTO(int id, String name){
@@ -18,12 +18,22 @@ public class CustomerDTO {
         this.name = name;
     }
 
-    public CustomerDTO(int id, String name, String lastName, String identificationType, int identification) {
+    public CustomerDTO(int id, String name, String lastName, String identificationType, Integer identification) {
         this.id=id;
         this.name=name;
         this.lastName=lastName;
         this.identificationType=identificationType;
         this.identification=identification;
+    }
+    public CustomerDTO(String name, String lastName, String identificationType, Integer identification){
+        this.name=name;
+        this.lastName=lastName;
+        this.identificationType= identificationType;
+        this.identification = identification;
+    }
+
+    public CustomerDTO(String name){
+        this.name = name;
     }
 
 
@@ -35,8 +45,8 @@ public class CustomerDTO {
     public void setLastName(String lastName){this.lastName=lastName;}
     public String getIdentificationType(){return identificationType;}
     public void setIdentificationType(String identificationType){this.identificationType=identificationType;}
-    public int getIdentification(){return identification;}
-    public void setIdentification(int identification){this.identification=identification;}
+    public Integer getIdentification(){return identification;}
+    public void setIdentification(Integer identification){this.identification=identification;}
 
     @Override
     public String toString() {
