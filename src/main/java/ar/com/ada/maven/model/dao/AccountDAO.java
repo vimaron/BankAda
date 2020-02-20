@@ -59,9 +59,47 @@ public class AccountDAO implements Dao<AccountDTO> {
             System.out.println("CONNECTION ERROR: " + e.getMessage());
         }
         return account;
-
-
     }
+
+    public int getTotalAccounts() {
+        String sql = "SELECT COUNT(*) AS total FROM Account";
+        int total = 0;
+        try {
+            Connection connection = DBConnection.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            if (rs.next()) total = rs.getInt("total");
+            connection.close();
+        } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+        return total;
+    }
+
+    public AccountDTO findByIban(String iban) {
+        String sql = "SELECT * FROM Account WHERE iban = ?";
+        AccountDTO account = null;
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, iban);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                CustomerDTO customer = customerDAO.findById(rs.getInt("Customer_id"));
+                AccountTypeDTO accountType = accountTypeDAO.findById(rs.getInt("Account_type_id"));
+                BranchDTO branch = branchDAO.findById(rs.getInt("Branch_id"));
+                account = new AccountDTO(rs.getInt("id"), rs.getString("number"), rs.getDouble("balance"), rs.getString("iban"), customer);
+            }
+
+            if (willCloseConnection) connection.close();
+        } catch (Exception e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+
+        return account;
+    }
+
+
     @Override
     public ArrayList<AccountDTO> findAll() {
         String sql = "SELECT * FROM Account";
