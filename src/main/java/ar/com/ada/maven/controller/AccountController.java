@@ -61,13 +61,13 @@ public class AccountController {
         } else {
             newNumber = String.valueOf(Integer.valueOf(account.getNumber()) + 1);
 
-            newNumber = String.format("%10s", newNumber).replace(' ', '0');
+            newNumber = AccountController.padLeftZeros(newNumber, 10);
         }
 
-        preIban = account.getBranchID().getBankID().getCountryID().getCode() +=
-                account.getBranchID().getBankID().getCountryID().getCode() += dc +
-                        account.getBranchID().getBankID().getCode() +=
-                        account.getBranchID().getIdentificationCode() += dc1 += newNumber;
+        preIban = account.getBranchID().getBankID().getCountryID().getCode() +
+                account.getBranchID().getBankID().getCountryID().getCode() + dc +
+                        account.getBranchID().getBankID().getCode() +
+                        account.getBranchID().getIdentificationCode() + dc1 + newNumber;
 
         if (!preIban.isEmpty()) {
             view.choiceCustomerIdInfo();
@@ -76,32 +76,28 @@ public class AccountController {
             Integer accountTypeId = AccountTypeController.listAccountsTypeControllerPerPage(Paginator.SELECT, false);
             Integer branchId = BranchController.listBranchsPerPage(Paginator.SELECT, false);
 
-            if (customerId != 0 && accountTypeId != 0 && branchId != 0 ) {
+            if (customerId != 0 && accountTypeId != 0 && branchId != 0) {
                 AccountDTO accountByIban = accountDAO.findByIban(preIban);
-            CustomerDTO continentById = customerDAO.findById(customerId);
-            AccountTypeDTO accountTypeById = accountTypeDAO.findById(accountTypeId);
-            BranchDTO branchById = branchDAO.findById(branchId);
+                CustomerDTO continentById = customerDAO.findById(customerId);
+                AccountTypeDTO accountTypeById = accountTypeDAO.findById(accountTypeId);
+                BranchDTO branchById = branchDAO.findById(branchId);
 
-            AccountDTO newAccount = new AccountDTO(newNumber, 0.0, preIban, continentById, accountTypeById, branchById );
+                AccountDTO newAccount = new AccountDTO(newNumber, 0.0, preIban, continentById, accountTypeById, branchById);
 
-            if (accountByIban != null && accountByIban.equals(newAccount)) {
-                view.accountAlreadyExists(newAccount.getIban());
+                if (accountByIban != null && accountByIban.equals(newAccount)) {
+                    view.accountAlreadyExists(newAccount.getIban());
+                } else {
+                    Boolean isSaved = accountDAO.save(newAccount);
+                    if (isSaved)
+                        view.showNewAccount(newAccount.getIban());
+                }
             } else {
-                Boolean isSaved = accountDAO.save(newAccount);
-                if (isSaved)
-                    view.showNewAccount(newAccount.getIban());
-            }
-            } else {
-            view.newAccountCanceled();
+                view.newAccountCanceled();
             }
         } else {
-        view.newAccountCanceled();
+            view.newAccountCanceled();
+        }
     }
-}
-
-
-
-
 
 
     private static int listAccountsPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
@@ -157,30 +153,59 @@ public class AccountController {
         return customerIdSelected;
     }
 
-    private static AccountDTO getAccountToDelete(String delete) {
+    private static AccountDTO getAccountToDelete(String optionDelete) {
         boolean hasExitWhile = false;
         AccountDTO  accountToDelete = null;
 
-        String actionInfo = Paginator.EDITH.equals(delete) ? "Eliminar";
+        String actionInfo = Paginator.EDITH.equals(optionDelete) ? "Eliminar";
 
         view.selectAccountIdToEdithOrDeleteInfo(actionInfo);
 
-        int accountIdToDelete = listAccountsPerPage(delete, true);
+        int accountIdToDelete = listAccountsPerPage(optionDelete, true);
 
         if (accountIdToDelete != 0) {
             while (!hasExitWhile) {
                 accountToDelete = accountDAO.findById(accountIdToDelete);
                 if (accountToDelete == null) {
-                    view.accountNotExist(countryIdToEdith);
-                    countryIdToEdith = view.continentIdSelected(optionEdithOrDelete);
-                    hasExitWhile = (countryIdToEdith == 0);
+                    view.accountNotExist(accountIdToDelete);
+                    accountIdToDelete = view.customerIdSelected(optionDelete);
+                    hasExitWhile = (accountIdToDelete == 0);
                 } else {
                     hasExitWhile = true;
                 }
             }
         }
 
-        return countryToEdithOrDelete;
+        return accountToDelete;
+    }
+
+    private static void deleteAccount() {
+        AccountDTO accountToDelete = getAccountToDelete(Paginator.DELETE);
+
+        if (accountToDelete != null) {
+            Boolean toDelete = view.getResponseToDelete(accountToDelete);
+            if (toDelete) {
+                Boolean isDelete = accountDAO.delete(accountToDelete.getId());
+
+                if (isDelete)
+                    view.showDeleteAccount(accountToDelete.getIban());
+            }
+        } else {
+            view.deleteAccountCanceled();
+        }
+    }
+
+    public static String padLeftZeros(String inputString, int length) {
+        if (inputString.length() >= length) {
+            return inputString;
+        }
+        StringBuilder sb = new StringBuilder();
+        while (sb.length() < length - inputString.length()) {
+            sb.append('0');
+        }
+        sb.append(inputString);
+
+        return sb.toString();
     }
 
 
