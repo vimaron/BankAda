@@ -157,8 +157,8 @@ public class AccountDAO implements Dao<AccountDTO> {
             preparedStatement.setDouble(2, accountDTO.getBalance());
             preparedStatement.setString(3, accountDTO.getIban());
             preparedStatement.setInt(4, accountDTO.getCustomerID().getId());
-            preparedStatement.setInt(accountDTO.getAccountTypeID().getId());
-            preparedStatement.setInt(accountDTO.getBranchID().getId());
+            preparedStatement.setInt(5, accountDTO.getAccountTypeID().getId());
+            preparedStatement.setInt(6, accountDTO.getBranchID().getId());
             affectedRows = preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {
@@ -181,10 +181,10 @@ public class AccountDAO implements Dao<AccountDTO> {
             preparedStatement.setDouble(2, accountDTO.getBalance());
             preparedStatement.setString(3, accountDTO.getIban());
             preparedStatement.setInt(4, accountDTO.getCustomerID().getId());
-            preparedStatement.setInt(accountDTO.getAccountTypeID().getId());
-            preparedStatement.setInt(accountDTO.getBranchID().getId());
+            preparedStatement.setInt(5, accountDTO.getAccountTypeID().getId());
+            preparedStatement.setInt(6, accountDTO.getBranchID().getId());
 
-            if (!(accountDTO.getNumber().equals(accountDB.getNumber()) && accountDTO.getBalance().equals(accountDB.getBalance()) &&
+            if (!(accountDTO.getNumber() == (accountDB.getNumber()) && accountDTO.getBalance() == (accountDB.getBalance()) &&
                     accountDTO.getIban().equals(accountDB.getIban()) && accountDTO.getCustomerID().equals(accountDB.getCustomerID()) &&
                     accountDTO.getAccountTypeID().equals(accountDB.getAccountTypeID()) && accountDTO.getBranchID().equals(accountDB.getBranchID())));
             hasUpdate = preparedStatement.executeUpdate();

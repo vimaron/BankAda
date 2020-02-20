@@ -9,6 +9,12 @@ public class CountryDTO {
 
     public CountryDTO(){}
 
+    public CountryDTO(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
     public int getId(){return id;}
     public void setId(int id){this.id=id;}
     public String getCode(){return code;}
