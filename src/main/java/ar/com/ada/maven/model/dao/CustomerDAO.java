@@ -174,4 +174,26 @@ public class CustomerDAO implements Dao<CustomerDTO> {
         return customer;
     }
 
+    public List<CustomerDTO> findAll(int limit, int offset) {
+        String sql = "SELECT * FROM Customer LIMIT ? OFFSET ?";
+        List<CustomerDTO> customers = new ArrayList<>();
+
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, limit);
+            preparedStatement.setInt(2, offset);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                CustomerDTO customer = new CustomerDTO(rs.getInt("id"), rs.getString("name"));
+                customers.add(customer);
+            }
+            connection.close();
+        } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+
+        return customers;
+    }
+
 }
