@@ -42,7 +42,7 @@ public class AccountView {
 
         st.setHeaders("ID", "CUENTA", "CLIENTE");
         accounts.forEach(accountDTO ->
-                st.addRow(accountDTO.getId().toString(), accountDTO.getNumber(), accountDTO.getBalance(), accountDTO.getIban(), accountDTO.getCustomerID(), accountDTO.getAccountTypeID())
+                st.addRow(accountDTO.getId().toString(), accountDTO.getNumber(), accountDTO.getBalance(), accountDTO.getIban(), accountDTO.getCustomerID(), accountDTO.getAccountTypeID(), accountDTO.getBranchID())
         );
         st.print();
 
