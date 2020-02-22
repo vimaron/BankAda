@@ -3,7 +3,7 @@ package ar.com.ada.maven.model.dto;
 import java.util.Objects;
 
 public class AccountTypeDTO {
-    private int id;
+    private Integer id;
     private String name;
 
     public AccountTypeDTO(){}
@@ -13,8 +13,8 @@ public class AccountTypeDTO {
         this.name=name;
     }
 
-    public int getId(){return id;}
-    public void setId(int id){this.id = id;}
+    public Integer getId(){return id;}
+    public void setId(Integer id){this.id = id;}
     public String getName(){return name;}
     public void setName(String name){this.name=name;}
 
