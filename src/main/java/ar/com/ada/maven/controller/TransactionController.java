@@ -22,7 +22,8 @@ public class TransactionController {
 
 
     private static void createNewTransaction(){
-
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
         int trasactionType = view.getTransactionType();
         AccountDTO account = null;
 
@@ -63,7 +64,7 @@ public class TransactionController {
                             if (accountId != 0) {
 
                                 accountById = accountDAO.findById(accountId);
-                                TransactionDTO newTransaction = new TransactionDTO(date, transactionAmount, accountById);
+                                TransactionDTO newTransaction = new TransactionDTO(dtf.format(now), transactionAmount, accountById);
 
                                 Boolean isSaved = transactionDAO.save(newTransaction);
                             } else {
@@ -72,11 +73,40 @@ public class TransactionController {
                         } else {
                             //la transaccion debe ser menor a mil
                         }
-                        };
-                            break;
-                        case 2: accountDolares();
                         break;
-                        case 3: accountEuros();
+                        case 2: if (transactionAmount <= 300) {
+                            view.choiceAccountIdInfo();
+                            accountId = AccountController.listAccountsPerPage(Paginator.SELECT, false);
+
+                            if (accountId != 0) {
+
+                                accountById = accountDAO.findById(accountId);
+                                TransactionDTO newTransaction = new TransactionDTO(dtf.format(now), transactionAmount, accountById);
+
+                                Boolean isSaved = transactionDAO.save(newTransaction);
+                            } else {
+                                //ingrese dato valido
+                            }
+                        } else {
+                            //la transaccion debe ser menor a mil
+                        }
+                        break;
+                        case 3: if (transactionAmount <= 150){
+                            view.choiceAccountIdInfo();
+                            accountId = AccountController.listAccountsPerPage(Paginator.SELECT, false);
+
+                            if (accountId != 0) {
+
+                                accountById = accountDAO.findById(accountId);
+                                TransactionDTO newTransaction = new TransactionDTO(dtf.format(now), transactionAmount, accountById);
+
+                                Boolean isSaved = transactionDAO.save(newTransaction);
+                            } else {
+                                //ingrese dato valido
+                            }
+                        } else {
+                            //la transaccion debe ser menor a mil
+                        }
                         break;
                         default:
                             System.out.println("ERROR");
