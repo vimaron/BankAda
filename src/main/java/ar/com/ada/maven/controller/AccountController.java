@@ -99,7 +99,7 @@ public class AccountController {
     }
 
 
-    private static int listAccountsPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
+    public static int listAccountsPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
         int limit = 4, currentPage = 0, totalAccounts, totalPages, customerIdSelected = 0;
         List<AccountDTO> accounts;
         List<String> paginator;

@@ -3,14 +3,13 @@ package ar.com.ada.maven.view;
 import ar.com.ada.maven.model.dto.CustomerDTO;
 import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.utils.ScannerSingleton;
-import jdk.internal.jline.internal.Ansi;
+
 
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import static ar.com.ada.maven.utils.ScannerSingleton.getInputString;
-import static ar.com.ada.maven.utils.ScannerSingleton.keyboard;
+
 
 public class CustomerView {
     public int customerMenuSelectOption(){

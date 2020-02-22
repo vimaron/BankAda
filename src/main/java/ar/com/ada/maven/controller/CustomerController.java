@@ -75,7 +75,7 @@ public class CustomerController {
 
     private static void deleteCustomer() {
         String optionDelete = "[Eliminar]";
-        int customerIdToDelete = listCustomersPerPage(optionDelete, true);
+        int customerIdToDelete = listCustomersPerPage(Paginator.DELETE, true);
         if (customerIdToDelete != 0)
             deleteSelectedCustomer(customerIdToDelete);
         else
