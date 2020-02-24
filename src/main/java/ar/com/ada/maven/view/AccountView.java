@@ -40,9 +40,16 @@ public class AccountView {
         CommandLineTable st = new CommandLineTable();
         st.setShowVerticalLines(true);
 
-        st.setHeaders("ID", "CUENTA", "CLIENTE");
+        st.setHeaders("ID", "CUENTA", "SALDO", "IBAN", "CLIENTE", "TIPO DE CUENTA", "SUCURSAL");
         accounts.forEach(accountDTO ->
-                st.addRow(accountDTO.getId().toString(), accountDTO.getNumber(), accountDTO.getBalance(), accountDTO.getIban(), accountDTO.getCustomerID(), accountDTO.getAccountTypeID(), accountDTO.getBranchID())
+                st.addRow(
+                        accountDTO.getId().toString(),
+                        accountDTO.getNumber(),
+                        String.valueOf(accountDTO.getBalance()),
+                        accountDTO.getIban(),
+                        accountDTO.getCustomerID().toString(),
+                        accountDTO.getAccountTypeID().toString(),
+                        accountDTO.getBranchID().toString())
         );
         st.print();
 
