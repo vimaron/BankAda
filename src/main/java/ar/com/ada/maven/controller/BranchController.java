@@ -51,7 +51,7 @@ public class BranchController {
 
         view.choiceBankIdInfo();
 
-        Integer bankId = BankController.ListBanksPerPage(Paginator.SELECT, false);
+        Integer bankId = BankController.listBanksPerPage(Paginator.SELECT, false);
 
 
         if (bankId != 0 ) {
@@ -75,7 +75,7 @@ public class BranchController {
 
     }
 
-    private static int listBranchsPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
+    static int listBranchsPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
         int limit = 4, currentPage = 0, totalBranchs, totalPages, bankIdSelected = 0;
         List<BranchDTO> branchs;
         List<String> paginator;
@@ -132,7 +132,7 @@ public class BranchController {
         boolean hasExitWhile = false;
         BranchDTO  branchToDelete = null;
 
-        String actionInfo = Paginator.EDITH.equals(optionDelete) ? "Eliminar";
+        String actionInfo = Paginator.EDITH.equals(optionDelete) ? "Eliminar" : "Editar";
 
         view.selectBranchIdToEdithOrDeleteInfo(actionInfo);
 
@@ -172,7 +172,7 @@ public class BranchController {
                 Boolean isSaved = branchDAO.update(branchById, id);
 
                 if (isSaved)
-                    view.showUpdateBranch(branchById.getName());
+                    view.showUpdateBranch(branchById);
             } else
                 view.updateBranchCanceled();
         } else {

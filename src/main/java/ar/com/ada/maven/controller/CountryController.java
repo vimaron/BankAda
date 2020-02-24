@@ -65,7 +65,7 @@ public class CountryController {
 
     }
 
-    private static Integer listCountriesPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
+    static Integer listCountriesPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
         int limit = 4, currentPage = 0, totalCountries, totalPages, countryIdSelected = 0;
         List<CountryDTO> countries;
         List<String> paginator;
@@ -162,7 +162,7 @@ public class CountryController {
                 Boolean isSaved = countryDAO.update(countryById, id);
 
                 if (isSaved)
-                    view.showUpdateCountry(countryById.getName());
+                    view.showUpdateCountry(countryById);
             } else
                 view.updateCountryCanceled();
         } else {

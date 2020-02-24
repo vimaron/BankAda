@@ -44,6 +44,7 @@ public class BankController {
     private static void listAllBanks() {
         listBanksPerPage(null, true);
     }
+
     private static void createNewBank() {
         String bankCode = view.getCode();
         String bankName = view.getBankName();
@@ -74,7 +75,7 @@ public class BankController {
 
     }
 
-    private static int listBanksPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
+    static int listBanksPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
         int limit = 4, currentPage = 0, totalBanks, totalPages, countryIdSelected = 0;
         List<BankDTO> banks;
         List<String> paginator;
@@ -125,6 +126,38 @@ public class BankController {
 
         }
         return countryIdSelected;
+    }
+
+    private static void updateBank() {
+        int bankIdToEdith = listBanksPerPage(Paginator.EDITH, true);
+        if (bankIdToEdith != 0)
+            updateSelectedBank(bankIdToEdith);
+        else
+            view.updateBankCanceled();
+    }
+
+    private static void updateSelectedBank(int id) {
+        BankDTO bankById = bankDAO.findById(id);
+        if (bankById != null) {
+            String nameToUpdate = view.getNameToUpdate(bankById);
+            if (!nameToUpdate.isEmpty()) {
+                bankDAO.findByName(nameToUpdate);
+                bankById.setName(nameToUpdate);
+
+                Boolean isSaved = bankDAO.update(bankDAO, id);
+
+                if (isSaved)
+                    view.showUpdateBank(bankById);
+            } else
+                view.updateBankCanceled();
+        } else {
+            view.bankNotExist(id);
+            int bankIdSelected = view.bankIdSelected("Editar");
+            if (bankIdSelected != 0)
+                updateSelectedBank(bankIdSelected);
+            else
+                view.updateBankCanceled();
+        }
     }
 
     private static BankDTO getBankToDelete(String optionDelete) {

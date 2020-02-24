@@ -79,44 +79,96 @@ public class BankView {
             System.out.println(Ansi.RESET);
             ScannerSingleton.pressEnterKeyToContinue();
         }
+    public void updateBankCanceled() {
+        System.out.println("Ha cancelado la actualizacion del Banco\n");
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
 
-        public void bankNotExist(int id) {
-            System.out.println("No existe un banco con este id " + id + " asociado");
-            System.out.println("Selecciones un ID valido o 0 para cancelar");
-        }
+    public void bankNotExist(int id) {
+        System.out.println("No existe un banco con este id " + id + " asociado");
+        System.out.println("Selecciones un ID valido o 0 para cancelar");
+    }
 
-        public void countryNotExist(int id) {
-            System.out.println("No existe un país con el id " + id + " asociado");
-            System.out.println("Selecciones un ID valido o 0 para cancelar");
-        }
+    public void countryNotExist(int id) {
+        System.out.println("No existe un país con el id " + id + " asociado");
+        System.out.println("Selecciones un ID valido o 0 para cancelar");
+    }
 
+    public String getNameToUpdate(BankDTO bank) {
+        System.out.print("Se actualizará el nombre de la siguiente sucursal: ");
+        System.out.println(Ansi.PURPLE + bank.getId() + " " + bank.getCode() + " " + bank.getName() + Ansi.RESET);
 
-        public static void selectBankIdToEdithOrDeleteInfo(String actions) {
-            System.out.println("De la siguiente lista de bancos, seleccione el id para  " + actions);
-            ScannerSingleton.pressEnterKeyToContinue();
-        }
+        System.out.print("Ingrese el nuevo nombre de la sucursal para actualizar ");
+        System.out.println("(para cancelar, no ingresar datos y presionar enter):\n");
 
-        public static void selectCountryIdToEdithInfo(String actions) {
-            System.out.println("De la siguiente lista de países, seleccione el id para  " + actions);
-            ScannerSingleton.pressEnterKeyToContinue();
-        }
+        keyboard.nextLine();
 
-        public Integer countryIdSelected(String actionOption) {
-            switch (actionOption) {
-                case Paginator.EDITH:
-                    actionOption = "editar";
-                    break;
-                case Paginator.DELETE:
-                    actionOption = "eliminar";
-                    break;
-                case Paginator.SELECT:
-                    actionOption = "elejir";
-                    break;
+        while (true) {
+            try {
+                System.out.print("? ");
+                String name = keyboard.nextLine().trim();
+                while (!name.matches("^[A-Za-záéíóúüÁÉÍÓÚÜ\\s]+$") && !name.isEmpty()) {
+                    MainView.invalidData();
+                    name = keyboard.nextLine();
+                }
+                return name;
+            } catch (InputMismatchException e) {
+                MainView.invalidData();
+                keyboard.next();
             }
-            System.out.println("Ingrese el numero de ID del país para " + actionOption + " ó 0 para cancelar: \n");
-
-            return Integer.valueOf( ScannerSingleton.getInputInteger());
         }
+    }
+
+
+    public static void selectBankIdToEdithOrDeleteInfo(String actions) {
+        System.out.println("De la siguiente lista de bancos, seleccione el id para  " + actions);
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+
+    public static void selectCountryIdToEdithInfo(String actions) {
+        System.out.println("De la siguiente lista de países, seleccione el id para  " + actions);
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+
+    public void showUpdateBank(BankDTO bank) {
+        System.out.println("La sucursal " + bank.getCode() + " (" + bank.getName() + ") se ha actualizado exitosamente");
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+
+    public Integer countryIdSelected(String actionOption) {
+        switch (actionOption) {
+            case Paginator.EDITH:
+                actionOption = "editar";
+                break;
+            case Paginator.DELETE:
+                actionOption = "eliminar";
+                break;
+            case Paginator.SELECT:
+                actionOption = "elejir";
+                break;
+        }
+        System.out.println("Ingrese el numero de ID del país para " + actionOption + " ó 0 para cancelar: \n");
+
+        return Integer.valueOf(ScannerSingleton.getInputInteger());
+    }
+
+    public Integer bankIdSelected(String actionOption) {
+        switch (actionOption) {
+            case Paginator.EDITH:
+                actionOption = "editar";
+                break;
+            case Paginator.DELETE:
+                actionOption = "eliminar";
+                break;
+            case Paginator.SELECT:
+                actionOption = "elejir";
+                break;
+        }
+        System.out.println("Ingrese el numero de ID del banco para " + actionOption + " ó 0 para cancelar: \n");
+
+        return Integer.valueOf( ScannerSingleton.getInputInteger());
+    }
+
 
         public Boolean getResponseToDelete(BankDTO bankDTO) {
             System.out.print("Se Eliminará el siguiente banco: ");
@@ -155,4 +207,13 @@ public class BankView {
             System.out.println("Ha cancelado la eliminacion del banco");
             ScannerSingleton.pressEnterKeyToContinue();
         }
+
+    public String getCode(){
+        System.out.println("Ingresar el código de banco: ");
+        return String.valueOf( ScannerSingleton.getInputString());
+    }
+    public String getBankName(){
+        System.out.println("Ingresar el nombre del banco: ");
+        return String.valueOf( ScannerSingleton.getInputString());
+    }
 }

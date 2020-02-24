@@ -79,6 +79,11 @@ public class BranchView {
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
+    public void updateBranchCanceled() {
+        System.out.println("Ha cancelado la actualizacion de la sucursal\n");
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+
     public void branchNotExist(int id) {
         System.out.println("No existe una sucursal con este id " + id + " asociado");
         System.out.println("Selecciones un ID valido o 0 para cancelar");
@@ -89,6 +94,31 @@ public class BranchView {
         System.out.println("Selecciones un ID valido o 0 para cancelar");
     }
 
+    public String getNameToUpdate(BranchDTO branch) {
+        System.out.print("Se actualizará el nombre de la siguiente sucursal: ");
+        System.out.println(Ansi.PURPLE + branch.getId() + " " + branch.getIdentificationCode() + " " + branch.getName() + Ansi.RESET);
+
+        System.out.print("Ingrese el nuevo nombre de la sucursal para actualizar ");
+        System.out.println("(para cancelar, no ingresar datos y presionar enter):\n");
+
+        keyboard.nextLine();
+
+        while (true) {
+            try {
+                System.out.print("? ");
+                String name = keyboard.nextLine().trim();
+                while (!name.matches("^[A-Za-záéíóúüÁÉÍÓÚÜ\\s]+$") && !name.isEmpty()) {
+                    MainView.invalidData();
+                    name = keyboard.nextLine();
+                }
+                return name;
+            } catch (InputMismatchException e) {
+                MainView.invalidData();
+                keyboard.next();
+            }
+        }
+    }
+
 
     public static void selectBranchIdToEdithOrDeleteInfo(String actions) {
         System.out.println("De la siguiente lista de sucursales, seleccione el id para  " + actions);
@@ -97,6 +127,11 @@ public class BranchView {
 
     public static void selectBankIdToEdithInfo(String actions) {
         System.out.println("De la siguiente lista de bsncos, seleccione el id para  " + actions);
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+
+    public void showUpdateBranch(BranchDTO branch) {
+        System.out.println("La sucursal " + branch.getIdentificationCode() + " (" + branch.getName() + ") se ha actualizado exitosamente");
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
@@ -113,6 +148,23 @@ public class BranchView {
                 break;
         }
         System.out.println("Ingrese el numero de ID del banco para " + actionOption + " ó 0 para cancelar: \n");
+
+        return Integer.valueOf( ScannerSingleton.getInputInteger());
+    }
+
+    public Integer branchIdSelected(String actionOption) {
+        switch (actionOption) {
+            case Paginator.EDITH:
+                actionOption = "editar";
+                break;
+            case Paginator.DELETE:
+                actionOption = "eliminar";
+                break;
+            case Paginator.SELECT:
+                actionOption = "elejir";
+                break;
+        }
+        System.out.println("Ingrese el numero de ID de la sucursal para " + actionOption + " ó 0 para cancelar: \n");
 
         return Integer.valueOf( ScannerSingleton.getInputInteger());
     }
@@ -153,5 +205,14 @@ public class BranchView {
     public void deleteBranchCanceled() {
         System.out.println("Ha cancelado la eliminacion de la sucursal");
         ScannerSingleton.pressEnterKeyToContinue();
+    }
+
+    public String getIdentificationCode(){
+        System.out.println("Ingresar el código de sucursal: ");
+        return String.valueOf( ScannerSingleton.getInputString());
+    }
+    public String getBranchName(){
+        System.out.println("Ingresar el nombre de la sucursal: ");
+        return String.valueOf( ScannerSingleton.getInputString());
     }
 }

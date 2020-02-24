@@ -24,6 +24,12 @@ public class BankDTO {
         this.countryID=countryID;
     }
 
+    public BankDTO(String code, String name, CountryDTO countryId) {
+        this.code=code;
+        this.name=name;
+        this.countryID=countryId;
+    }
+
     public Integer getId(){return id;}
     public void setId(Integer id){this.id=id;}
     public String getCode(){return code;}

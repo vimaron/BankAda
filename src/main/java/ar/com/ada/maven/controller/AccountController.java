@@ -92,11 +92,8 @@ public class AccountController {
             }
         } else {
             view.newAccountCanceled();
+        }
     }
-
-
-
-
 
 
     private static int listAccountsPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
@@ -154,9 +151,9 @@ public class AccountController {
 
     private static AccountDTO getAccountToDelete(String optionDelete) {
         boolean hasExitWhile = false;
-        AccountDTO  accountToDelete = null;
+        AccountDTO accountToDelete = null;
 
-        String actionInfo = Paginator.EDITH.equals(optionDelete) ? "Eliminar";
+        String actionInfo = Paginator.DELETE.equals(optionDelete) ? "Eliminar": "Eliminar";
 
         view.selectAccountIdToEdithOrDeleteInfo(actionInfo);
 
@@ -207,9 +204,10 @@ public class AccountController {
         return sb.toString();
     }
 
-
-
 }
+
+
+
 
 
 
