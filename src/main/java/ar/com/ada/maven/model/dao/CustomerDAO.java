@@ -12,7 +12,7 @@ public class CustomerDAO implements Dao<CustomerDTO> {
 
     private Boolean willCloseConnection = true;
 
-    private CustomerDAO customerDAO = new CustomerDAO(false);
+    
 
     public CustomerDAO() {}
 
