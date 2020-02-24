@@ -14,6 +14,9 @@ public class CountryDTO {
         this.name = name;
     }
 
+    public CountryDTO(int id, String code, String name) {
+        this.id = id;
+
     public CountryDTO(String code, String name) {
         this.code = code;
         this.name = name;
