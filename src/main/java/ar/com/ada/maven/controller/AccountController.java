@@ -66,36 +66,36 @@ public class AccountController {
 
         preIban = account.getBranchID().getBankID().getCountryID().getCode() +
                 account.getBranchID().getBankID().getCountryID().getCode() + dc +
-                        account.getBranchID().getBankID().getCode() +
-                        account.getBranchID().getIdentificationCode() + dc1 + newNumber;
-        
-            view.choiceCustomerIdInfo();
+                account.getBranchID().getBankID().getCode() +
+                account.getBranchID().getIdentificationCode() + dc1 + newNumber;
 
-            Integer customerId = CustomerController.listCustomersPerPage(Paginator.SELECT, false);
-            Integer accountTypeId = AccountTypeController.listAccountsTypePerPage(Paginator.SELECT, false);
-            Integer branchId = BranchController.listBranchsPerPage(Paginator.SELECT, false);
+        view.choiceCustomerIdInfo();
 
-            if (customerId != 0 && accountTypeId != 0 && branchId != 0) {
-                AccountDTO accountByIban = accountDAO.findByIban(preIban);
-                CustomerDTO continentById = customerDAO.findById(customerId);
-                AccountTypeDTO accountTypeById = accountTypeDAO.findById(accountTypeId);
-                BranchDTO branchById = branchDAO.findById(branchId);
+        Integer customerId = CustomerController.listCustomersPerPage(Paginator.SELECT, false);
+        Integer accountTypeId = AccountTypeController.listAccountsTypePerPage(Paginator.SELECT, false);
+        Integer branchId = BranchController.listBranchsPerPage(Paginator.SELECT, false);
 
-                AccountDTO newAccount = new AccountDTO(newNumber, 0.0, preIban, continentById, accountTypeById, branchById);
+        if (customerId != 0 && accountTypeId != 0 && branchId != 0) {
+            AccountDTO accountByIban = accountDAO.findByIban(preIban);
+            CustomerDTO continentById = customerDAO.findById(customerId);
+            AccountTypeDTO accountTypeById = accountTypeDAO.findById(accountTypeId);
+            BranchDTO branchById = branchDAO.findById(branchId);
 
-                if (accountByIban != null && accountByIban.equals(newAccount)) {
-                    view.accountAlreadyExists(newAccount.getIban());
-                } else {
-                    Boolean isSaved = accountDAO.save(newAccount);
-                    if (isSaved)
-                        view.showNewAccount(newAccount.getIban());
-                }
+            AccountDTO newAccount = new AccountDTO(newNumber, 0.0, preIban, continentById, accountTypeById, branchById);
+
+            if (accountByIban != null && accountByIban.equals(newAccount)) {
+                view.accountAlreadyExists(newAccount.getIban());
             } else {
-                view.newAccountCanceled();
+                Boolean isSaved = accountDAO.save(newAccount);
+                if (isSaved)
+                    view.showNewAccount(newAccount.getIban());
             }
         } else {
             view.newAccountCanceled();
-        }
+    }
+
+
+
 
 
 
