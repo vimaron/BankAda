@@ -73,7 +73,7 @@ public class BankDAO {
         return hasInsert == 1;
     }
 
-    public Boolean update(BankDTO bank) {
+    public Boolean update(BankDTO bank, Integer id) {
         String sql = "UPDATE Bank SET code = ?, name = ?, Country_id = ? WHERE id = ?";
         int hasUpdate = 0;
 
@@ -134,6 +134,27 @@ public class BankDAO {
             Connection connection = DBConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, name);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                CountryDTO country = countryDAO.findById(rs.getInt("Country_id"));
+                bank = new BankDTO(rs.getInt("id"), rs.getString("code"), rs.getString("name"), country);
+            }
+
+            if (willCloseConnection) connection.close();
+        } catch (Exception e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+
+        return bank;
+    }
+
+    public BankDTO findByCode(String code) {
+        String sql = "SELECT * FROM Bank WHERE code = ?";
+        BankDTO bank = null;
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, code);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 CountryDTO country = countryDAO.findById(rs.getInt("Country_id"));

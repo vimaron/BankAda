@@ -16,10 +16,11 @@ public class CountryDTO {
 
     public CountryDTO(int id, String code, String name) {
         this.id = id;
+    }
 
-    public CountryDTO(String code, String name) {
-        this.code = code;
-        this.name = name;
+    public CountryDTO(String countryCode, String countryName) {
+        this.code=countryCode;
+        this.name=countryName;
     }
 
     public Integer getId(){return id;}

@@ -26,7 +26,7 @@ public class AccountTypeController {
                     createNewAccountType();
                     break;
                 case 3:
-                    deleteSelectedAccountType();
+                    deleteAccountType();
                     break;
                 case 5:
                     shouldGetOut = true;
@@ -136,30 +136,47 @@ public class AccountTypeController {
         }
     }
 
-    private static void deleteSelectedAccountType(int id) {
-        AccountTypeDTO accountTypeDTO = accountTypeDAO.findById(id);
-        if (accountTypeDTO != null) {
-            Boolean toDelete = view.getResponseToDelete(accountTypeDTO);
-            if (toDelete) {
+    private static void deleteAccountType() {
+        AccountTypeDTO accountTypeToDelete = getAccountTypeToDelete(Paginator.DELETE);
 
-                Boolean isDelete = accountTypeDAO.delete(id);
+        if (accountTypeToDelete != null) {
+            Boolean toDelete = view.getResponseToDelete(accountTypeToDelete);
+            if (toDelete) {
+                Boolean isDelete = accountTypeDAO.delete(accountTypeToDelete.getId());
 
                 if (isDelete)
-                    view.showDeleteAccountType(accountTypeDTO.getName());
-            } else
-                view.deleteAccountTypeCanceled();
+                    view.showDeleteAccountType(accountTypeToDelete.getName());
+            }
         } else {
-            view.accountTypeNotExist(id);
-            int accountTypeIdSelected = view.accountTypeIdSelected("Eliminar");
-            if (accountTypeIdSelected != 0)
-                deleteSelectedAccountType(accountTypeIdSelected);
-            else
-                view.deleteAccountTypeCanceled();
+            view.deleteAccountTypeCanceled();
         }
     }
 
+    private static AccountTypeDTO getAccountTypeToDelete(String optionDelete) {
+        boolean hasExitWhile = false;
+        AccountTypeDTO  accountTypeToDelete = null;
 
+        String actionInfo = Paginator.EDITH.equals(optionDelete) ? "Eliminar": "Editar";
 
+        view.selectAccountTypeIdToEdithOrDeleteInfo(actionInfo);
+
+        int accountTypeIdToDelete = listAccountsTypePerPage(optionDelete, true);
+
+        if (accountTypeIdToDelete != 0) {
+            while (!hasExitWhile) {
+                accountTypeToDelete = accountTypeDAO.findById(accountTypeIdToDelete);
+                if (accountTypeToDelete == null) {
+                    view.accountTypeNotExist(accountTypeIdToDelete);
+                    accountTypeIdToDelete = view.accountTypeIdSelected(optionDelete);
+                    hasExitWhile = (accountTypeIdToDelete == 0);
+                } else {
+                    hasExitWhile = true;
+                }
+            }
+        }
+
+        return accountTypeToDelete;
+    }
 
 
 }

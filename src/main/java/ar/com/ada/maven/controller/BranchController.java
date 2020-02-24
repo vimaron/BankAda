@@ -56,7 +56,7 @@ public class BranchController {
 
         if (bankId != 0 ) {
 
-            BranchDTO branchByIdentificationCode = branchDAO.findbByIdentificationCode(branchIdentificationCode);
+            BranchDTO branchByIdentificationCode = branchDAO.findByIdentificationCode(branchIdentificationCode);
             BankDTO bankById = bankDAO.findById(bankId);
 
             BranchDTO newBranch = new BranchDTO(branchIdentificationCode, branchName, bankById);

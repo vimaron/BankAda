@@ -122,7 +122,7 @@ public class CountryController {
         boolean hasExitWhile = false;
         CountryDTO  countryToEdithOrDelete = null;
 
-        String actionInfo = Paginator.EDITH.equals(optionEdithOrDelete) ? "Eliminar";
+        String actionInfo = Paginator.EDITH.equals(optionEdithOrDelete) ? "Eliminar": "Editar";
 
         view.selectCountryIdToEdithOrDeleteInfo(actionInfo);
 

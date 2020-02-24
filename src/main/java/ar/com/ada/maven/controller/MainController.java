@@ -12,7 +12,7 @@ public class MainController {
             switch (varWhile){
                 case 1: CustomerController.init();
                 break;
-                case 2: ;
+                case 2: AccountController.init();
                 break;
                 case 3: bool = true;
                 break;

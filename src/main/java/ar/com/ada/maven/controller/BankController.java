@@ -56,7 +56,7 @@ public class BankController {
 
         if (countryId != 0 ) {
 
-            BankDTO bankByCode = bankDAO.findbByCode(bankCode);
+            BankDTO bankByCode = bankDAO.findByCode(bankCode);
             CountryDTO countryById = countryDAO.findById(countryId);
 
             BankDTO newBank = new BankDTO(bankCode, bankName, countryById);
@@ -144,7 +144,7 @@ public class BankController {
                 bankDAO.findByName(nameToUpdate);
                 bankById.setName(nameToUpdate);
 
-                Boolean isSaved = bankDAO.update(bankDAO, id);
+                Boolean isSaved = bankDAO.update(bankById, id);
 
                 if (isSaved)
                     view.showUpdateBank(bankById);
@@ -164,7 +164,7 @@ public class BankController {
         boolean hasExitWhile = false;
         BankDTO  bankToDelete = null;
 
-        String actionInfo = Paginator.EDITH.equals(optionDelete) ? "Eliminar";
+        String actionInfo = Paginator.EDITH.equals(optionDelete) ? "Eliminar": "Editar";
 
         view.selectBankIdToEdithOrDeleteInfo(actionInfo);
 

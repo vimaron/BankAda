@@ -79,7 +79,7 @@ public class BranchDAO {
         return hasInsert == 1;
     }
 
-    public Boolean update(BranchDTO branch) {
+    public Boolean update(BranchDTO branch, Integer id) {
         String sql = "UPDATE Branch SET Identification_Code = ?, name = ?, Bank_id = ? WHERE id = ?";
         int hasUpdate = 0;
 
@@ -172,6 +172,26 @@ public class BranchDAO {
             System.out.println("CONNECTION ERROR: " + e.getMessage());
         }
 
+        return branch;
+    }
+
+    public BranchDTO findByName(String name) {
+        String sql = "SELECT * FROM Branch WHERE name = ?";
+        BranchDTO branch = null;
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                BankDTO bank = bankDAO.findById(rs.getInt("Bank_Id"));
+                branch = new BranchDTO(rs.getInt("id"), rs.getString("identification_Code"), rs.getString("name"), bank);
+            }
+            if (willCloseConection) connection.close();
+        } catch (Exception e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+
+        }
         return branch;
     }
 }

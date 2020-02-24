@@ -72,11 +72,11 @@ public class CountryDAO {
         return hasInsert == 1;
     }
 
-    public Boolean update(CountryDTO country) {
+    public Boolean update(CountryDTO country, Integer id) {
         String sql = "UPDATE Country SET code = ?, name = ? WHERE id = ?";
         int hasUpdate = 0;
 
-        CountryDTO countryDB = findById(country.getId());
+        CountryDTO countryDB = findById(id);
 
         try {
             Connection connection = DBConnection.getConnection();

@@ -169,13 +169,18 @@ public class AccountTypeView {
         System.out.println("Selecciones un ID valido o 0 para cancelar");
     }
 
+    public static void selectAccountTypeIdToEdithOrDeleteInfo(String actions) {
+        System.out.println("De la siguiente lista de tipo de cuentas, seleccione el id para  " + actions);
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+
     public void updateAccountTypeCanceled() {
-        System.out.println("Ha cancelado la actualizacion del Continente\n");
+        System.out.println("Ha cancelado la actualizacion del tipo de cuenta\n");
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
     public void showUpdateAccountType(String name) {
-        System.out.println("El continente " + name + " se ha actualizado exitosamente");
+        System.out.println("El tipo de cuenta " + name + " se ha actualizado exitosamente");
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
