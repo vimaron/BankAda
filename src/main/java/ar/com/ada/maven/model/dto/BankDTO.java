@@ -4,28 +4,28 @@ package ar.com.ada.maven.model.dto;
 import java.util.Objects;
 
 public class BankDTO {
-    private int id;
+    private Integer id;
     private String code;
     private String name;
     private CountryDTO countryID;
 
     public BankDTO(){}
 
-    public BankDTO(int id, String code, String name) {
+    public BankDTO(Integer id, String code, String name) {
         this.id=id;
         this.code=code;
         this.name=name;
     }
 
-    public BankDTO(int id, String code, String name, CountryDTO countryID) {
+    public BankDTO(Integer id, String code, String name, CountryDTO countryID) {
         this.id=id;
         this.code=code;
         this.name=name;
         this.countryID=countryID;
     }
 
-    public int getId(){return id;}
-    public void setId(int id){this.id=id;}
+    public Integer getId(){return id;}
+    public void setId(Integer id){this.id=id;}
     public String getCode(){return code;}
     public void setCode(String code){this.code=code;}
     public String getName(){return name;}
