@@ -72,7 +72,7 @@ public class AccountController {
             view.choiceCustomerIdInfo();
 
             Integer customerId = CustomerController.listCustomersPerPage(Paginator.SELECT, false);
-            Integer accountTypeId = AccountTypeController.listAccountsTypeControllerPerPage(Paginator.SELECT, false);
+            Integer accountTypeId = AccountTypeController.listAccountsTypePerPage(Paginator.SELECT, false);
             Integer branchId = BranchController.listBranchsPerPage(Paginator.SELECT, false);
 
             if (customerId != 0 && accountTypeId != 0 && branchId != 0) {
@@ -96,7 +96,7 @@ public class AccountController {
         } else {
             view.newAccountCanceled();
         }
-    }
+
 
 
     private static int listAccountsPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
