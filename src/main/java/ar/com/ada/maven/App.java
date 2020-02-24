@@ -12,12 +12,12 @@ import java.util.List;
 public class App 
 {
     public static void main( String[] args ) {
-        CustomerDAO dao = new CustomerDAO();
-        //METODO FIND ALL
-        List<CustomerDTO> customerDTOList = dao.findAll();
-        //METODO FIND BY ID
-        //METODO SAVE
-        //METODO UPDATE
-        //METODO DELETE
+//        CustomerDAO dao = new CustomerDAO();
+//        //METODO FIND ALL
+//        List<CustomerDTO> customerDTOList = dao.findAll();
+//        //METODO FIND BY ID
+//        //METODO SAVE
+//        //METODO UPDATE
+//        //METODO DELETE
     }
 }
