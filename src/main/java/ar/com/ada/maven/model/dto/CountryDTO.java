@@ -14,6 +14,11 @@ public class CountryDTO {
         this.name = name;
     }
 
+    public CountryDTO(int id, String code, String name) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+    }
 
     public int getId(){return id;}
     public void setId(int id){this.id=id;}
