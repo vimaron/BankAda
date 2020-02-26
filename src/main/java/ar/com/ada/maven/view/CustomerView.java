@@ -1,26 +1,29 @@
 package ar.com.ada.maven.view;
 
 import ar.com.ada.maven.model.dto.CustomerDTO;
+import ar.com.ada.maven.utils.CommandLineTable;
 import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.utils.ScannerSingleton;
-import jdk.internal.jline.internal.Ansi;
+
 
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import static ar.com.ada.maven.utils.ScannerSingleton.getInputString;
-import static ar.com.ada.maven.utils.ScannerSingleton.keyboard;
+
 
 public class CustomerView {
-    public int customerMenuSelectOption(){
+
+
+    public Integer customerMenuSelectOption(){
         System.out.println("\n+----------------------------------------+");
         System.out.println("Corrupt Bank :: Modulo Cliente");
         System.out.println("\n+----------------------------------------+");
         System.out.println("Seleccione una opcion: \n 1.Listar \n 2.Agregar \n 3.Editar " +
                 "\n 4.Eliminar \n 5.Regresar al menu principal");
+        String num = ScannerSingleton.getInputInteger();
+        return Integer.valueOf(num);
 
-        return Integer.valueOf(ScannerSingleton.getInputInteger());
     }
 
     public void printAllCustomers(List<CustomerDTO> customers){
@@ -40,6 +43,15 @@ public class CustomerView {
             System.out.println("\t  Corrupt Bank :: Modulo Clientes :: Lista Cliente");
             System.out.println("+----------------------------------------------------------------+\n");
         }
+
+        CommandLineTable st = new CommandLineTable();
+        st.setShowVerticalLines(true);
+
+        st.setHeaders("ID", "CLIENTE");
+        customers.forEach(customer ->
+                st.addRow(customer.getId().toString(), customer.getName())
+        );
+        st.print();
 
         if (optionEdithOrDelete != null && !optionEdithOrDelete.isEmpty())
             paginator.set(paginator.size() - 2, optionEdithOrDelete);
@@ -63,11 +75,13 @@ public class CustomerView {
             case Paginator.SELECT:
                 actionOption = "elejir";
                 break;
+
         }
         System.out.println("Ingrese el numero de ID del cliente para " + actionOption + " ó 0 para cancelar: \n");
 
         return Integer.valueOf( ScannerSingleton.getInputInteger());
     }
+
 
     public String getNameNewContinent(){
         System.out.println("Ingresar el nombre del nuevo cliente: ");
@@ -91,12 +105,12 @@ public class CustomerView {
         ScannerSingleton.pressEnterKeyToContinue();
     }
     public void newCustomerCanceled() {
-        System.out.println("Ha cancelado el ingreso de un nuevo Continente\n");
+        System.out.println("Ha cancelado el ingreso de un nuevo Cliente\n");
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
     public void customerAlreadyExists(String name){
-        System.out.println("Error al guardar, ya existe un contienen con el nombre " + name);
+        System.out.println("Error al guardar, ya existe un cliente con el nombre " + name);
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
@@ -142,8 +156,7 @@ public class CustomerView {
         System.out.println("Seleccione que desea modificar: 1. Nombre \n 2.Apellido \n 3.Tipo de identificacion");
 
         return Integer.valueOf(ScannerSingleton.getInputInteger());
-
-        }
+    }
 
     public void showUpdateCustomer(String name) {
         System.out.println("El cliente " + name + " se ha actualizado exitosamente");
@@ -151,7 +164,7 @@ public class CustomerView {
     }
 
     public void updateCustomerCanceled() {
-        System.out.println("Ha cancelado la actualizacion del Continente\n");
+        System.out.println("Ha cancelado la actualizacion del cliente\n");
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
@@ -163,29 +176,14 @@ public class CustomerView {
         System.out.println("| 1 | Si");
         System.out.println("| 2 | No");
 
-        Scanner keyboard = ScannerSingleton.getInstance();
-        keyboard.nextLine();
-
-        while (true) {
-            try {
-                System.out.print("? ");
-                String name = keyboard.nextLine().trim();
-                while (!name.matches("^[1-2]+$") && !name.isEmpty()) {
-                    System.out.println("Error, debe ingresar una opcion valida");
-                    name = keyboard.nextLine();
-                }
-                return "1".equals(name);
-            } catch (InputMismatchException e) {
-                System.out.println("Error, debe ingresar una opcion valida");
-                keyboard.next();
-            }
-        }
+        return Boolean.valueOf(ScannerSingleton.getInputString());
     }
 
     public void showDeleteCustomer(String name) {
         System.out.println("El cliente " + name + " se ha eliminado exitosamente");
         ScannerSingleton.pressEnterKeyToContinue();
     }
+
 
     public void customerNotExist(int id) {
         System.out.println("No existe un cliente con el id " + id + " asociado");
