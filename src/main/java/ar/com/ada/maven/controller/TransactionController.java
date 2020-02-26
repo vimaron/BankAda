@@ -24,9 +24,6 @@ public class TransactionController {
 
     public static void createNewTransaction(){
 
-
-    private static void createNewTransaction(){
-
         Date today = new Date();
         String trasactionType = view.getTransactionType();
 
