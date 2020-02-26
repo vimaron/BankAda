@@ -3,19 +3,19 @@ package ar.com.ada.maven.model.dto;
 import java.util.Objects;
 
 public class CustomerDTO {
-    private int id;
+    private Integer id;
     private String name;
     private String lastName;
     private String identificationType;
     private Integer identification;
 
     public CustomerDTO(){}
-    public CustomerDTO(int id, String name){
+    public CustomerDTO(Integer id, String name){
         this.id = id;
         this.name = name;
     }
 
-    public CustomerDTO(int id, String name, String lastName, String identificationType, Integer identification) {
+    public CustomerDTO(Integer id, String name, String lastName, String identificationType, Integer identification) {
         this.id=id;
         this.name=name;
         this.lastName=lastName;
@@ -38,8 +38,8 @@ public class CustomerDTO {
     }
 
 
-    public int getId(){return id;}
-    public void setId(int id){this.id=id;}
+    public Integer getId(){return id;}
+    public void setId(Integer id){this.id=id;}
     public String getName(){return name;}
     public void setName(String name){this.name=name;}
     public String getLastName(){return lastName;}

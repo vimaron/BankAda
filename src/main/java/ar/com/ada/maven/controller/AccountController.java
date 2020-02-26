@@ -21,6 +21,7 @@ public class AccountController {
     private static AccountTypeDAO accountTypeDAO = new AccountTypeDAO(false);
     private static BranchDAO branchDAO = new BranchDAO(false);
     private static TransactionDAO transactionDAO = new TransactionDAO(false);
+
     static void init() {
         boolean shouldGetOut = false;
 
@@ -39,7 +40,6 @@ public class AccountController {
                     break;
                 case 4:
                     addTransaction();
-
                     break;
                 case 5:
                     shouldGetOut = true;
@@ -107,7 +107,9 @@ public class AccountController {
 
 
 
+
     public static int listAccountsPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
+
 
         int limit = 4, currentPage = 0, totalAccounts, totalPages, customerIdSelected = 0;
         List<AccountDTO> accounts;
@@ -166,7 +168,7 @@ public class AccountController {
 
         AccountDTO accountToDelete = null;
 
-        String actionInfo = Paginator.DELETE.equals(optionDelete) ? "Eliminar": "Eliminar";
+        String actionInfo = Paginator.DELETE.equals(optionDelete) ? "Eliminar" : "Eliminar";
 
         view.selectAccountIdToEdithOrDeleteInfo(actionInfo);
 
@@ -218,6 +220,7 @@ public class AccountController {
 
         return sb.toString();
     }
+
 
     public static void addTransaction() {
         TransactionController.createNewTransaction();
