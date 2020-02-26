@@ -4,9 +4,12 @@ import ar.com.ada.maven.model.dto.CustomerDTO;
 import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.utils.ScannerSingleton;
 
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+
 
 public class CustomerView {
     public int customerMenuSelectOption(){
@@ -15,6 +18,7 @@ public class CustomerView {
         System.out.println("\n+----------------------------------------+");
         System.out.println("Seleccione una opcion: \n 1.Listar \n 2.Agregar \n 3.Editar " +
                 "\n 4.Eliminar \n 5.Regresar al menu principal");
+
 
         ScannerSingleton.getInputInteger();
         return Integer.valueOf(ScannerSingleton.getInputInteger());
@@ -60,11 +64,13 @@ public class CustomerView {
             case Paginator.SELECT:
                 actionOption = "elejir";
                 break;
+
         }
         System.out.println("Ingrese el numero de ID del cliente para " + actionOption + " ó 0 para cancelar: \n");
 
         return Integer.valueOf( ScannerSingleton.getInputInteger());
     }
+
 
     public String getNameNewContinent(){
         System.out.println("Ingresar el nombre del nuevo cliente: ");
@@ -166,6 +172,7 @@ public class CustomerView {
         System.out.println("El cliente " + name + " se ha eliminado exitosamente");
         ScannerSingleton.pressEnterKeyToContinue();
     }
+
 
     public void customerNotExist(int id) {
         System.out.println("No existe un cliente con el id " + id + " asociado");

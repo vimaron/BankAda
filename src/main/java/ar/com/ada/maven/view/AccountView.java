@@ -44,6 +44,7 @@ public class AccountView {
 
         st.setHeaders("ID", "CUENTA", "SALDO", "IBAN", "CLIENTE", "TIPO DE CUENTA", "SUCURSAL");
         accounts.forEach(accountDTO ->
+
                 st.addRow(
                         accountDTO.getId().toString(),
                         accountDTO.getNumber(),
@@ -52,6 +53,7 @@ public class AccountView {
                         accountDTO.getCustomerID().toString(),
                         accountDTO.getAccountTypeID().toString(),
                         accountDTO.getBranchID().toString())
+
         );
         st.print();
 

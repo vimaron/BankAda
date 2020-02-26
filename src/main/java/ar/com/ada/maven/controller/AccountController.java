@@ -35,9 +35,11 @@ public class AccountController {
                     break;
                 case 3:
                     deleteAccount();
+
                     break;
                 case 4:
                     addTransaction();
+
                     break;
                 case 5:
                     shouldGetOut = true;
@@ -54,9 +56,11 @@ public class AccountController {
 
     private static void createNewAccount() {
         String newNumber;
+
         String preIban = " ";
         String dc1 = "00";
         String dc = "00";
+
 
 
         AccountDTO account = accountDAO.getLastAccount();
@@ -67,6 +71,7 @@ public class AccountController {
 
             newNumber = AccountController.padLeftZeros(newNumber, 10);
         }
+
 
         preIban = account.getBranchID().getBankID().getCountryID().getCode() +
                 account.getBranchID().getBankID().getCountryID().getCode() + dc +
@@ -93,6 +98,7 @@ public class AccountController {
                 Boolean isSaved = accountDAO.save(newAccount);
                 if (isSaved)
                     view.showNewAccount(newAccount.getIban());
+
             }
         } else {
             view.newAccountCanceled();
@@ -100,7 +106,9 @@ public class AccountController {
     }
 
 
+
     private static int listAccountsPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
+
         int limit = 4, currentPage = 0, totalAccounts, totalPages, customerIdSelected = 0;
         List<AccountDTO> accounts;
         List<String> paginator;
@@ -155,6 +163,7 @@ public class AccountController {
 
     private static AccountDTO getAccountToDelete(String optionDelete) {
         boolean hasExitWhile = false;
+
         AccountDTO accountToDelete = null;
 
         String actionInfo = Paginator.DELETE.equals(optionDelete) ? "Eliminar": "Eliminar";
@@ -182,6 +191,7 @@ public class AccountController {
     private static void deleteAccount() {
         AccountDTO accountToDelete = getAccountToDelete(Paginator.DELETE);
 
+
         if (accountToDelete != null) {
             Boolean toDelete = view.getResponseToDelete(accountToDelete);
             if (toDelete) {
@@ -205,6 +215,7 @@ public class AccountController {
         }
         sb.append(inputString);
 
+
         return sb.toString();
     }
 
@@ -213,9 +224,6 @@ public class AccountController {
     }
 
 }
-
-
-
 
 
 
