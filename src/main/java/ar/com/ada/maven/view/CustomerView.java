@@ -47,9 +47,9 @@ public class CustomerView {
         CommandLineTable st = new CommandLineTable();
         st.setShowVerticalLines(true);
 
-        st.setHeaders("ID", "CLIENTE");
+        st.setHeaders("ID", "NOMBRE","NOMBRE", "APELLIDO", "TIPO DE IDENTIFICACIÓN", "NÚMERO DE IDENTIFICACIÒN");
         customers.forEach(customer ->
-                st.addRow(customer.getId().toString(), customer.getName())
+                st.addRow(customer.getId().toString(), customer.getName(), customer.getLastName(), customer.getIdentificationType(), String.valueOf(customer.getIdentification()))
         );
         st.print();
 
