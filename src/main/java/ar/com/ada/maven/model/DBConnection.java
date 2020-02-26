@@ -9,7 +9,7 @@ public class DBConnection {
     private static String user = "adabank";
     private static String password = "Daiyvicky";
     private static String host = "jdbc:mysql://localhost:3306/";
-    private static String db = "Adabank";
+    private static String db = "Bank";
     private static String drive = "com.mysql.cj.jdbc.Driver";
 
     private DBConnection() {

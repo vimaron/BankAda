@@ -14,14 +14,17 @@ public class AccountDTO{
     public AccountDTO(){}
 
 
-    public AccountDTO(int i, String number, Double balance, String iban) {
+
+    public AccountDTO(Integer id, String number, Double balance, String iban) {
+
         this.id=id;
         this.number=number;
         this.balance=balance;
         this.iban=iban;
     }
 
-    public AccountDTO(int id, String number, Double balance, String iban,
+    public AccountDTO(Integer id, String number, Double balance, String iban,
+
                       CustomerDTO customerID, AccountTypeDTO accountType, BranchDTO branchID) {
         this.id=id;
         this.number=number;
@@ -43,7 +46,8 @@ public class AccountDTO{
     }
 
     public Integer getId(){return id;}
-    public void setId(int id){this.id=id;}
+
+    public void setId(Integer id){this.id=id;}
     public String getNumber(){return number;}
     public void setNumber(String number){this.number=number;}
     public Double getBalance(){return balance;}

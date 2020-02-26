@@ -2,7 +2,6 @@ package ar.com.ada.maven.utils;
 
 import ar.com.ada.maven.view.MainView;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -23,8 +22,9 @@ public class ScannerSingleton {
     public static void pressEnterKeyToContinue(){
         System.out.println("Presione ENTER para continuar ");
         try{
-            System.in.read();
-        } catch (IOException e) {
+            System.out.println();
+        } catch (Exception e) {
+            System.out.println("ERROR :: " + e.getMessage());
         }
     }
 

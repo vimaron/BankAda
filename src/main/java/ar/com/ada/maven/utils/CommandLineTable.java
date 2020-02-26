@@ -88,6 +88,4 @@ public class CommandLineTable {
         System.out.println();
     }
 
-    public void addRow(String toString, int number, double balance, String iban, CustomerDTO customerID, AccountTypeDTO accountTypeID) {
-    }
 }
