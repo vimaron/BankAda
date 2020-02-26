@@ -3,6 +3,7 @@ package ar.com.ada.maven.view;
 import ar.com.ada.maven.model.dto.CustomerDTO;
 import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.utils.ScannerSingleton;
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +16,7 @@ public class CustomerView {
         System.out.println("Seleccione una opcion: \n 1.Listar \n 2.Agregar \n 3.Editar " +
                 "\n 4.Eliminar \n 5.Regresar al menu principal");
 
+        ScannerSingleton.getInputInteger();
         return Integer.valueOf(ScannerSingleton.getInputInteger());
     }
 
@@ -86,12 +88,12 @@ public class CustomerView {
         ScannerSingleton.pressEnterKeyToContinue();
     }
     public void newCustomerCanceled() {
-        System.out.println("Ha cancelado el ingreso de un nuevo Continente\n");
+        System.out.println("Ha cancelado el ingreso de un nuevo Cliente\n");
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
     public void customerAlreadyExists(String name){
-        System.out.println("Error al guardar, ya existe un contienen con el nombre " + name);
+        System.out.println("Error al guardar, ya existe un cliente con el nombre " + name);
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
@@ -137,8 +139,7 @@ public class CustomerView {
         System.out.println("Seleccione que desea modificar: 1. Nombre \n 2.Apellido \n 3.Tipo de identificacion");
 
         return Integer.valueOf(ScannerSingleton.getInputInteger());
-
-        }
+    }
 
     public void showUpdateCustomer(String name) {
         System.out.println("El cliente " + name + " se ha actualizado exitosamente");
@@ -146,7 +147,7 @@ public class CustomerView {
     }
 
     public void updateCustomerCanceled() {
-        System.out.println("Ha cancelado la actualizacion del Continente\n");
+        System.out.println("Ha cancelado la actualizacion del cliente\n");
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
@@ -158,23 +159,7 @@ public class CustomerView {
         System.out.println("| 1 | Si");
         System.out.println("| 2 | No");
 
-        Scanner keyboard = ScannerSingleton.getInstance();
-        keyboard.nextLine();
-
-        while (true) {
-            try {
-                System.out.print("? ");
-                String name = keyboard.nextLine().trim();
-                while (!name.matches("^[1-2]+$") && !name.isEmpty()) {
-                    System.out.println("Error, debe ingresar una opcion valida");
-                    name = keyboard.nextLine();
-                }
-                return "1".equals(name);
-            } catch (InputMismatchException e) {
-                System.out.println("Error, debe ingresar una opcion valida");
-                keyboard.next();
-            }
-        }
+        return Boolean.valueOf(ScannerSingleton.getInputString());
     }
 
     public void showDeleteCustomer(String name) {

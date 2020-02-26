@@ -20,12 +20,14 @@ public class AccountView {
         System.out.println("+----------------------------------------+\n");
 
         System.out.println("Seleccione una acción del menú:\n");
-        System.out.println("| 1 | Listar");
-        System.out.println("| 2 | Agregar"); //preguntar si conviene mostrar agregar
-        System.out.println("| 3 | Eliminar");
-        System.out.println("| 4 | Regresar al menú principal");
+        System.out.println("| 1 | Listar cuentas");
+        System.out.println("| 2 | Agregar nueva cuenta"); //preguntar si conviene mostrar agregar
+        System.out.println("| 3 | Eliminar cuenta");
+        System.out.println("| 4 | Agregar nueva transaccciòn de cuenta");
+        System.out.println("| 5 | Regresar al menú principal");
         System.out.println("-------------------------\n");
 
+        ScannerSingleton.getInputInteger();
         return Integer.valueOf(ScannerSingleton.getInputInteger());
 
     }
@@ -67,6 +69,20 @@ public class AccountView {
         System.out.println("Seleccione de la siguiente lista, el cliente al que pertenece la cuenta");
         ScannerSingleton.pressEnterKeyToContinue();
     }
+
+    public void choiceCountryCodeInfo() {
+        System.out.println("Escriba de la siguiente lista, el còdigo del país al que pertenece la cuenta");
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+    public void choiceBranchCodeInfo() {
+        System.out.println("Escriba de la siguiente lista, el codigo de la sucursal al que pertenece la cuenta");
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+    public void choiceBankCodeInfo() {
+        System.out.println("escriba de la siguiente lista, el código del banco al que pertenece la cuenta");
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+
 
     public void newAccountCanceled() {
         System.out.println("Se ha cancelado la creación de una nueva cuenta\n");

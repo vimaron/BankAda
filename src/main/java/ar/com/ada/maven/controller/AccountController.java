@@ -1,15 +1,14 @@
 package ar.com.ada.maven.controller;
 
-import ar.com.ada.maven.model.dao.AccountDAO;
-import ar.com.ada.maven.model.dao.AccountTypeDAO;
-import ar.com.ada.maven.model.dao.BranchDAO;
-import ar.com.ada.maven.model.dao.CustomerDAO;
+import ar.com.ada.maven.model.dao.*;
 import ar.com.ada.maven.model.dto.AccountDTO;
 import ar.com.ada.maven.model.dto.AccountTypeDTO;
 import ar.com.ada.maven.model.dto.BranchDTO;
 import ar.com.ada.maven.model.dto.CustomerDTO;
 import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.view.AccountView;
+import ar.com.ada.maven.view.BankView;
+import ar.com.ada.maven.view.CountryView;
 import ar.com.ada.maven.view.MainView;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class AccountController {
     private static CustomerDAO customerDAO = new CustomerDAO(false);
     private static AccountTypeDAO accountTypeDAO = new AccountTypeDAO(false);
     private static BranchDAO branchDAO = new BranchDAO(false);
-
+    private static TransactionDAO transactionDAO = new TransactionDAO(false);
     static void init() {
         boolean shouldGetOut = false;
 
@@ -36,6 +35,9 @@ public class AccountController {
                     break;
                 case 3:
                     deleteAccount();
+                    break;
+                case 4:
+                    addTransaction();
                     break;
                 case 5:
                     shouldGetOut = true;
@@ -52,9 +54,11 @@ public class AccountController {
 
     private static void createNewAccount() {
         String newNumber;
-        String preIban = "";
+        String preIban = " ";
         String dc1 = "00";
         String dc = "00";
+
+
         AccountDTO account = accountDAO.getLastAccount();
         if (account == null) {
             newNumber = "0000000000";
@@ -202,6 +206,10 @@ public class AccountController {
         sb.append(inputString);
 
         return sb.toString();
+    }
+
+    public static void addTransaction() {
+        TransactionController.createNewTransaction();
     }
 
 }

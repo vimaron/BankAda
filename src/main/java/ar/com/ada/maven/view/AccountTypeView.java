@@ -38,23 +38,7 @@ public class AccountTypeView {
         System.out.println("(para cancelar, no ingresar datos y presionar enter):");
         System.out.println("-------------------------\n");
 
-        Scanner keyboard = ScannerSingleton.getInstance();
-        keyboard.nextLine();
-
-        while (true) {
-            try {
-                System.out.print("? ");
-                String name = keyboard.nextLine().trim();
-                while (!name.matches("^[A-Za-záéíóúüÁÉÍÓÚÜ\\s]+$") && !name.isEmpty()) {
-                    System.out.println("Error, debe ingresar un dato valido");
-                    name = keyboard.nextLine();
-                }
-                return name;
-            } catch (InputMismatchException e) {
-                System.out.println("Error, debe ingresar un dato valido");
-                keyboard.next();
-            }
-        }
+        return ScannerSingleton.getInputString();
     }
 
     public void showNewAccountType(String name) {
@@ -95,24 +79,10 @@ public class AccountTypeView {
         paginator.forEach(page -> System.out.print(page + " "));
         System.out.println("\n+----------------------------------------------------------------+\n");
 
-        while (true) {
-            try {
-                System.out.print("? ");
-                String name = keyboard.nextLine().trim();
-                while (!name.matches("^[0-9IiAaSsUuEeqQ]+$") && !name.isEmpty()) {
-                    MainView.chooseValidOption();
-                    System.out.print("? ");
-                    name = keyboard.nextLine();
-                }
-                return name;
-            } catch (InputMismatchException e) {
-                MainView.chooseValidOption();
-                keyboard.next();
-            }
-        }
+        return ScannerSingleton.getInputString();
     }
 
-    public int accountTypeIdSelected(String actionOption) {
+    public Integer accountTypeIdSelected(String actionOption) {
         switch (actionOption) {
             case "[" + Ansi.CYAN + "E" + Ansi.RESET + "ditar]":
                 actionOption = "editar";
@@ -126,16 +96,7 @@ public class AccountTypeView {
         }
         System.out.println("Ingrese el numero de ID del tipo de cuenta para " + actionOption + " ó 0 para cancelar: \n");
 
-        while (true) {
-            try {
-                System.out.print("? ");
-                int choice = keyboard.nextInt();
-                return choice;
-            } catch (InputMismatchException e) {
-                System.out.println("Error, debe ingresar un id valido");
-                keyboard.next();
-            }
-        }
+        return Integer.valueOf(ScannerSingleton.getInputInteger());
     }
 
     public static String getNameToUpdate(AccountTypeDTO accountTypeDTO) {
@@ -145,23 +106,7 @@ public class AccountTypeView {
         System.out.print("Ingrese el nombre del continente para actualizar ");
         System.out.println("(para cancelar, no ingresar datos y presionar enter):\n");
 
-        Scanner keyboard = ScannerSingleton.getInstance();
-        keyboard.nextLine();
-
-        while (true) {
-            try {
-                System.out.print("? ");
-                String name = keyboard.nextLine().trim();
-                while (!name.matches("^[A-Za-záéíóúüÁÉÍÓÚÜ\\s]+$") && !name.isEmpty()) {
-                    System.out.println("Error, debe ingresar un dato valido");
-                    name = keyboard.nextLine();
-                }
-                return name;
-            } catch (InputMismatchException e) {
-                System.out.println("Error, debe ingresar un dato valido");
-                keyboard.next();
-            }
-        }
+        return ScannerSingleton.getInputString();
     }
 
     public void accountTypeNotExist(int id) {

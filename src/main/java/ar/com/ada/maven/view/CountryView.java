@@ -13,7 +13,7 @@ public class CountryView {
 
     private Scanner keyboard = ScannerSingleton.getInstance();
 
-    public int countryMenuSelectedOption() {
+    public Integer countryMenuSelectedOption() {
         System.out.println("\n+--------------------------------------------------+");
         System.out.println("\t\t  Bank Ada app :: Modulo de Países");
         System.out.println("+--------------------------------------------------+\n");
@@ -26,16 +26,7 @@ public class CountryView {
         System.out.println("| 5 | Regresar el menu principal");
         System.out.println("-------------------------\n");
 
-        while (true) {
-            try {
-                System.out.print("? ");
-                int choice = keyboard.nextInt();
-                return choice;
-            } catch (InputMismatchException e) {
-                MainView.chooseValidOption();
-                keyboard.next();
-            }
-        }
+        return Integer.valueOf(ScannerSingleton.getInputInteger());
     }
 
     public String printCountriesPerPage(List<CountryDTO> countries, List<String> paginator, String optionEdithOrDelete, boolean showHeader) {
@@ -61,21 +52,7 @@ public class CountryView {
         paginator.forEach(page -> System.out.print(page + " "));
         System.out.println("\n+----------------------------------------------------------------+\n");
 
-        while (true) {
-            try {
-                System.out.print("? ");
-                String name = keyboard.nextLine().trim();
-                while (!name.matches("^[0-9IiAaSsUuEeqQ]+$") && !name.isEmpty()) {
-                    MainView.chooseValidOption();
-                    System.out.print("? ");
-                    name = keyboard.nextLine();
-                }
-                return name;
-            } catch (InputMismatchException e) {
-                MainView.chooseValidOption();
-                keyboard.next();
-            }
-        }
+        return ScannerSingleton.getInputString();
     }
 
     public String getNameNewCountry() {
@@ -87,22 +64,7 @@ public class CountryView {
         System.out.println("(para cancelar, no ingresar datos y presionar enter):");
         System.out.println("-------------------------\n");
 
-        keyboard.nextLine();
-
-        while (true) {
-            try {
-                System.out.print("? ");
-                String name = keyboard.nextLine().trim();
-                while (!name.matches("^[A-Za-záéíóúüÁÉÍÓÚÜ\\s]+$") && !name.isEmpty()) {
-                    MainView.invalidData();
-                    name = keyboard.nextLine();
-                }
-                return name;
-            } catch (InputMismatchException e) {
-                MainView.invalidData();
-                keyboard.next();
-            }
-        }
+        return ScannerSingleton.getInputString();
     }
 
 
@@ -142,24 +104,9 @@ public class CountryView {
         System.out.print("Ingrese el nuevo nombre del pais para actualizar ");
         System.out.println("(para cancelar, no ingresar datos y presionar enter):\n");
 
-        keyboard.nextLine();
-
-        while (true) {
-            try {
-                System.out.print("? ");
-                String name = keyboard.nextLine().trim();
-                while (!name.matches("^[A-Za-záéíóúüÁÉÍÓÚÜ\\s]+$") && !name.isEmpty()) {
-                    MainView.invalidData();
-                    name = keyboard.nextLine();
-                }
-                return name;
-            } catch (InputMismatchException e) {
-                MainView.invalidData();
-                keyboard.next();
-            }
-        }
+        return ScannerSingleton.getInputString();
     }
-    public int countryIdSelected(String actionOption) {
+    public Integer countryIdSelected(String actionOption) {
         switch (actionOption) {
             case "[" + Ansi.CYAN + "E" + Ansi.RESET + "ditar]":
                 actionOption = "editar";
@@ -173,16 +120,7 @@ public class CountryView {
         }
         System.out.println("Ingrese el numero de ID del país para " + actionOption + " ó 0 para cancelar: \n");
 
-        while (true) {
-            try {
-                System.out.print("? ");
-                int choice = keyboard.nextInt();
-                return choice;
-            } catch (InputMismatchException e) {
-                System.out.println("Error, debe ingresar un id valido");
-                keyboard.next();
-            }
-        }
+        return Integer.valueOf(ScannerSingleton.getInputString());
     }
 
     public static void selectCountryIdToEdithOrDeleteInfo(String actions) {
@@ -239,5 +177,5 @@ public class CountryView {
     public String getCountryName(){
         System.out.println("Ingresar el nombre del país: ");
         return String.valueOf( ScannerSingleton.getInputString());
-}
+    }
 }

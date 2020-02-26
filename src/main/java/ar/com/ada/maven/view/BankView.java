@@ -101,22 +101,7 @@ public class BankView {
         System.out.print("Ingrese el nuevo nombre de la sucursal para actualizar ");
         System.out.println("(para cancelar, no ingresar datos y presionar enter):\n");
 
-        keyboard.nextLine();
-
-        while (true) {
-            try {
-                System.out.print("? ");
-                String name = keyboard.nextLine().trim();
-                while (!name.matches("^[A-Za-záéíóúüÁÉÍÓÚÜ\\s]+$") && !name.isEmpty()) {
-                    MainView.invalidData();
-                    name = keyboard.nextLine();
-                }
-                return name;
-            } catch (InputMismatchException e) {
-                MainView.invalidData();
-                keyboard.next();
-            }
-        }
+        return ScannerSingleton.getInputString();
     }
 
 
