@@ -171,4 +171,28 @@ public class AccountDAO implements Dao<AccountDTO> {
         }
         return hasDelete == 1;
     }
+
+    public ArrayList<AccountDTO> findByCustomerId(int customerId) {
+        String sql = "SELECT * FROM Account WHERE Customer_id = ?";
+        ArrayList<AccountDTO> accounts = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, customerId);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                // con el campo Continent_id busco el continente con el dao de Continent
+                CustomerDTO customer = customerDAO.findById(rs.getInt("Customer_id"));
+                AccountTypeDTO accountType = accountTypeDAO.findById(rs.getInt("AccountType_id"));
+                BranchDTO branch = branchDAO.findById(rs.getInt("Branch_id"));
+                AccountDTO account = new AccountDTO(rs.getInt("id"), rs.getInt("number"),
+                        rs.getDouble("balance"), rs.getString("iban"), customer, accountType, branch);
+                accounts.add(account);
+            }
+            connection.close();
+        } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+        return accounts;
+    }
 }
