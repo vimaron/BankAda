@@ -224,7 +224,7 @@ public class AccountDAO implements Dao<AccountDTO> {
                 // con el campo Customer_id busco el cliente con el dao de Customer
                 CustomerDTO customer = customerDAO.findById(rs.getInt("Customer_id"));
                 AccountDTO account = new AccountDTO(rs.getInt("id"), rs.getString("number"), customer);
-                countries.add(country);
+                accounts.add(account);
             }
             connection.close();
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
