@@ -132,4 +132,41 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
         }
         return hasDelete == 1;
     }
+
+    public int getTotalAccountsType() {
+        String sql = "SELECT COUNT(*) AS total FROM Account-type";
+        int total = 0;
+        try {
+            Connection connection = DBConnection.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            if (rs.next())  total = rs.getInt("total");
+            connection.close();
+        } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+
+        return total;
+    }
+
+    public AccountTypeDTO findByName(String name) {
+        String sql = "SELECT * FROM Account-type WHERE name = ?";
+        AccountTypeDTO accountTypeDTO = null;
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                accountTypeDTO = new AccountTypeDTO(rs.getInt("id"), rs.getString("name"));
+            }
+
+            if (willCloseConnection) connection.close();
+        } catch (Exception e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+
+        return accountTypeDTO;
+    }
+
 }

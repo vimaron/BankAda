@@ -3,22 +3,28 @@ package ar.com.ada.maven.model.dto;
 import java.util.Objects;
 
 public class BranchDTO {
-    private int id;
+    private Integer id;
     private String identificationCode;
     private String name;
     private BankDTO bankID;
 
     public BranchDTO(){}
 
-    public BranchDTO(int id, String identificationCode, String name, BankDTO bankID) {
+    public BranchDTO(Integer id, String identificationCode, String name, BankDTO bankID) {
         this.id=id;
         this.identificationCode=identificationCode;
         this.name=name;
         this.bankID=bankID;
     }
 
-    public int getId(){return id;}
-    public void setId(int id){this.id=id;}
+    public BranchDTO(String identificationCode, String name, BankDTO bankID) {
+        this.identificationCode = identificationCode;
+        this.name = name;
+        this.bankID = bankID;
+    }
+
+    public Integer getId(){return id;}
+    public void setId(Integer id){this.id=id;}
     public String getIdentificationCode(){return identificationCode;}
     public void setIdentificationCode(String identification_code){this.identificationCode=identification_code;}
     public String getName(){return name;}
