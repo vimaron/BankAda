@@ -20,7 +20,7 @@ public class TransactionDTO {
         this.accountID=accountID;
         this.transactionTypeID=transactionTypeID;
     }
-    
+
 
     public TransactionDTO(Date date, Double amount, AccountDTO accountID, TransactionTypeDTO transactionTypeID){
         this.date= date;
@@ -28,6 +28,9 @@ public class TransactionDTO {
         this.accountID=accountID;
         this.transactionTypeID = transactionTypeID;
     }
+
+
+
 
     public int getId(){return id;}
     public void setId(int id){this.id=id;}
