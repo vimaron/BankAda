@@ -183,7 +183,7 @@ public class CustomerDAO implements Dao<CustomerDTO> {
             preparedStatement.setInt(2, offset);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                CustomerDTO customer = new CustomerDTO(rs.getInt("id"), rs.getString("name"));
+                CustomerDTO customer = new CustomerDTO(rs.getInt("id"), rs.getString("name"), rs.getString("last_name"), rs.getString("identification_type"), rs.getInt("identification"));
                 customers.add(customer);
             }
             connection.close();
