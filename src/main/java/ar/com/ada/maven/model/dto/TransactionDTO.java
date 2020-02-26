@@ -29,6 +29,16 @@ public class TransactionDTO {
         this.transactionTypeID = transactionTypeID;
     }
 
+    public TransactionDTO(Date date, Double amount, AccountDTO accountID, TransactionTypeDTO transactionTypeID){
+        this.date= date;
+        this.amount= amount;
+        this.accountID=accountID;
+        this.transactionTypeID = transactionTypeID;
+    }
+
+
+
+
     public int getId(){return id;}
     public void setId(int id){this.id=id;}
     public Date getDate(){return date;}

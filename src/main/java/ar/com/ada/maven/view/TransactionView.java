@@ -1,10 +1,13 @@
 package ar.com.ada.maven.view;
 
+import ar.com.ada.maven.model.dto.TransactionTypeDTO;
 import ar.com.ada.maven.utils.ScannerSingleton;
+
+import java.util.Date;
 
 public class TransactionView {
 
-    public int getTransactionType() {
+    public String getTransactionType() {
         System.out.println("\n+----------------------------------------------------------------+");
         System.out.println("\t  Corrupt Bank :: Modulo de Transacciones");
         System.out.println("+----------------------------------------------------------------+\n");
@@ -13,7 +16,7 @@ public class TransactionView {
         System.out.println("(para cancelar, no ingresar datos y presionar enter):");
         System.out.println("-------------------------\n");
 
-        return ScannerSingleton.getInputString();
+        return ScannerSingleton.getInputInteger();
     }
 
     public Double getTransactionAmount(){
@@ -26,4 +29,25 @@ public class TransactionView {
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
+    public void invalidData(){
+        System.out.println("Ingrese un dato valido ");
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+
+    public String invalidTransactionAmount(String optionAccountType) {
+
+        System.out.print("La transaccion para este tipo de cuenta debe ser menor a " + optionAccountType);
+
+        return ScannerSingleton.getInputString();
+    }
+    public void showNewTransaction(Date date, Double amount, TransactionTypeDTO transactionTypeId) {
+        System.out.println("En la fecha "+ date + " se ha agregado exitosamente la transaccion "
+                + transactionTypeId + "por " + amount);
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+
+    public void newTransactionCancelled() {
+        System.out.println("Ha cancelado la nueva transaccion\n");
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
 }
