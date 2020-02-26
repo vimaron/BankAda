@@ -5,9 +5,12 @@ import ar.com.ada.maven.utils.CommandLineTable;
 import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.utils.ScannerSingleton;
 
+
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+
 
 public class CustomerView {
 
@@ -72,11 +75,13 @@ public class CustomerView {
             case Paginator.SELECT:
                 actionOption = "elejir";
                 break;
+
         }
         System.out.println("Ingrese el numero de ID del cliente para " + actionOption + " ó 0 para cancelar: \n");
 
         return Integer.valueOf( ScannerSingleton.getInputInteger());
     }
+
 
     public String getNameNewContinent(){
         System.out.println("Ingresar el nombre del nuevo cliente: ");
@@ -178,6 +183,7 @@ public class CustomerView {
         System.out.println("El cliente " + name + " se ha eliminado exitosamente");
         ScannerSingleton.pressEnterKeyToContinue();
     }
+
 
     public void customerNotExist(int id) {
         System.out.println("No existe un cliente con el id " + id + " asociado");
