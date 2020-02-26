@@ -49,8 +49,8 @@ public class CustomerView {
 
         st.setHeaders("ID","NOMBRE", "APELLIDO", "TIPO DE IDENTIFICACIÓN", "NÚMERO DE IDENTIFICACIÒN");
         customers.forEach(customer ->
-                st.addRow(customer.getId().toString(), customer.getName(), customer.getLastName(), customer.getIdentificationType(), String.valueOf(customer.getIdentification()))
-        );
+                st.addRow(customer.getId().toString(), customer.getName(), customer.getLastName(),
+                        customer.getIdentificationType(), String.valueOf(customer.getIdentification())));
         st.print();
 
         if (optionEdithOrDelete != null && !optionEdithOrDelete.isEmpty())
