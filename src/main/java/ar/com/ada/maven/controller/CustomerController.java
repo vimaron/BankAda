@@ -5,7 +5,6 @@ import ar.com.ada.maven.model.dto.CustomerDTO;
 import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.view.CustomerView;
 import ar.com.ada.maven.view.MainView;
-import jdk.internal.jline.internal.Ansi;
 
 import java.util.List;
 
@@ -23,12 +22,18 @@ public class CustomerController {
                     break;
                 case 2:
                     createNewCustomer();
+                    break;
                 case 3:
                     edithCustomer();
+                    break;
                 case 4:
                     deleteCustomer();
+                    break;
+                case 5:
+                    bool = true;
+                    break;
                 default:
-                    System.out.println("Se debe seleccionar una opcion valida");
+                    MainView.invalidData();
             }
 
         }
@@ -75,7 +80,10 @@ public class CustomerController {
 
     private static void deleteCustomer() {
         String optionDelete = "[Eliminar]";
-        int customerIdToDelete = listCustomersPerPage(optionDelete, true);
+
+        int customerIdToDelete = listCustomersPerPage(Paginator.DELETE, true);
+
+   
         if (customerIdToDelete != 0)
             deleteSelectedCustomer(customerIdToDelete);
         else

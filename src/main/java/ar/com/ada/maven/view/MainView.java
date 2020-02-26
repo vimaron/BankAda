@@ -10,19 +10,7 @@ public class MainView {
     public int selectOption(){
         System.out.println("Welcome to Corrupt Bank");
         System.out.println("Selecciones una opcion: \n 1.Cliente \n 2.Cuentas \n 3.Salir");
-
-        Scanner key = ScannerSingleton.getInstance();
-
-
-        while (true){
-            try {
-                int choice = key.nextInt();
-                return choice;
-            } catch (InputMismatchException e){
-                MainView.invalidData();
-                key.next();
-            }
-        }
+        return Integer.valueOf(ScannerSingleton.getInputInteger());
     }
 
     public static void invalidData(){

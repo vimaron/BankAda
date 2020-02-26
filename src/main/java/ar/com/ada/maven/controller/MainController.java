@@ -10,12 +10,15 @@ public class MainController {
         while (!bool){
             int varWhile = view.selectOption();
             switch (varWhile){
-                case 1: CustomerController.init();
-                break;
-                case 2: ;
-                break;
-                case 3: bool = true;
-                break;
+                case 1:
+                    CustomerController.init();
+                    break;
+                case 2:
+                    AccountController.init();
+                    break;
+                case 3:
+                    bool = true;
+                    break;
                 default:
                     System.out.println("Seleccionar una opcion valida");
             }
