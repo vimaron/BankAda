@@ -168,8 +168,8 @@ public class CustomerController {
     private static void deleteSelectedCustomer(int id) {
         CustomerDTO customer = customerDAO.findById(id);
         if (customer != null) {
-            Boolean toDelete = view.getResponseToDelete(customer);
-            if (toDelete) {
+            Integer toDelete = view.getResponseToDelete(customer);
+            if (toDelete == 1) {
 
                 Boolean isDelete = customerDAO.delete(id);
 

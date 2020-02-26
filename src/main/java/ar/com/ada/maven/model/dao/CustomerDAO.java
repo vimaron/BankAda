@@ -90,6 +90,7 @@ public class CustomerDAO implements Dao<CustomerDTO> {
             preparedStatement.setString(2, customerDTO.getLastName());
             preparedStatement.setString(3, customerDTO.getIdentificationType());
             preparedStatement.setInt(4, customerDTO.getIdentification());
+            preparedStatement.setInt(5, id);
 
             if (!(customerDTO.getName().equals(customerDB.getName()) &&
                     customerDTO.getLastName().equals(customerDB.getLastName()) &&
