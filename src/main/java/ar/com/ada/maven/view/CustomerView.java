@@ -6,7 +6,6 @@ import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.utils.ScannerSingleton;
 
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -48,9 +47,10 @@ public class CustomerView {
         st.setShowVerticalLines(true);
 
         st.setHeaders("ID","NOMBRE", "APELLIDO", "TIPO DE IDENTIFICACIÓN", "NÚMERO DE IDENTIFICACIÒN");
+
         customers.forEach(customer ->
-                st.addRow(customer.getId().toString(), customer.getName(), customer.getLastName(), customer.getIdentificationType(), String.valueOf(customer.getIdentification()))
-        );
+                st.addRow(customer.getId().toString(), customer.getName(), customer.getLastName(),
+                        customer.getIdentificationType(), String.valueOf(customer.getIdentification())));
         st.print();
 
         if (optionEdithOrDelete != null && !optionEdithOrDelete.isEmpty())
@@ -125,8 +125,6 @@ public class CustomerView {
         System.out.print("Ingrese el nombre del cliente para actualizar ");
         System.out.println("(para cancelar, no ingresar datos y presionar enter):\n");
 
-        Scanner keyboard = ScannerSingleton.getInstance();
-        keyboard.nextLine();
         return String.valueOf(ScannerSingleton.getInputString());
 
     }
@@ -168,7 +166,7 @@ public class CustomerView {
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
-    public static Boolean getResponseToDelete(CustomerDTO customer){
+    public static Integer getResponseToDelete(CustomerDTO customer){
         System.out.print("Se Eliminará el siguiente cliente: ");
         System.out.println( customer.getId() + " " + customer.getName());
 
@@ -176,7 +174,7 @@ public class CustomerView {
         System.out.println("| 1 | Si");
         System.out.println("| 2 | No");
 
-        return Boolean.valueOf(ScannerSingleton.getInputString());
+        return Integer.valueOf(ScannerSingleton.getInputInteger());
     }
 
     public void showDeleteCustomer(String name) {

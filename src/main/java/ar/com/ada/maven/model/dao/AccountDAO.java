@@ -220,13 +220,14 @@ public class AccountDAO implements Dao<AccountDTO> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, customerId);
             ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
+
                 // con el campo Continent_id busco el continente con el dao de Continent
                 CustomerDTO customer = customerDAO.findById(rs.getInt("Customer_id"));
                 AccountTypeDTO accountType = accountTypeDAO.findById(rs.getInt("AccountType_id"));
                 BranchDTO branch = branchDAO.findById(rs.getInt("Branch_id"));
                 AccountDTO account = new AccountDTO(rs.getInt("id"), rs.getInt("number"),
                         rs.getDouble("balance"), rs.getString("iban"), customer, accountType, branch);
+
                 accounts.add(account);
             }
             connection.close();
