@@ -25,10 +25,10 @@ public class TransactionController {
     public static void createNewTransaction(){
 
         Date today = new Date();
-        String trasactionType = view.getTransactionType();
+        String transactionType = view.getTransactionType();
 
 
-        if (trasactionType == "1") {
+        if (transactionType == "1") {
 
             Double transactionAmount = view.getTransactionAmount();
             TransactionTypeDTO transactionTypeId = transactionTypeDAO.findById(1);
