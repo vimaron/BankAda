@@ -45,6 +45,14 @@ public class AccountDTO{
         this.branchID = branchID;
     }
 
+    public AccountDTO(Integer id, String number, Double balance, String iban, CustomerDTO customerID) {
+        this.id = id;
+        this.number = number;
+        this.balance = balance;
+        this.iban = iban;
+        this.customerID = customerID;
+    }
+
     public Integer getId(){return id;}
 
     public void setId(Integer id){this.id=id;}

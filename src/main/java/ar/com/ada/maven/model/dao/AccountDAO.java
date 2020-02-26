@@ -223,7 +223,7 @@ public class AccountDAO implements Dao<AccountDTO> {
             while (rs.next()) {
                 // con el campo Customer_id busco el cliente con el dao de Customer
                 CustomerDTO customer = customerDAO.findById(rs.getInt("Customer_id"));
-                AccountDTO account = new AccountDTO(rs.getInt("id"), rs.getString("number"), customer);
+                AccountDTO account = new AccountDTO(rs.getInt("id"), rs.getString("number"), rs.getDouble("balance"), rs.getString("iban"), customer);
                 accounts.add(account);
             }
             connection.close();
