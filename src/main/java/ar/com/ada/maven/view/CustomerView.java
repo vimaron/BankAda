@@ -1,6 +1,7 @@
 package ar.com.ada.maven.view;
 
 import ar.com.ada.maven.model.dto.CustomerDTO;
+import ar.com.ada.maven.utils.CommandLineTable;
 import ar.com.ada.maven.utils.Paginator;
 import ar.com.ada.maven.utils.ScannerSingleton;
 
@@ -9,15 +10,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CustomerView {
-    public int customerMenuSelectOption(){
+
+
+    public Integer customerMenuSelectOption(){
         System.out.println("\n+----------------------------------------+");
         System.out.println("Corrupt Bank :: Modulo Cliente");
         System.out.println("\n+----------------------------------------+");
         System.out.println("Seleccione una opcion: \n 1.Listar \n 2.Agregar \n 3.Editar " +
                 "\n 4.Eliminar \n 5.Regresar al menu principal");
+        String num = ScannerSingleton.getInputInteger();
+        return Integer.valueOf(num);
 
-        ScannerSingleton.getInputInteger();
-        return Integer.valueOf(ScannerSingleton.getInputInteger());
     }
 
     public void printAllCustomers(List<CustomerDTO> customers){
@@ -37,6 +40,15 @@ public class CustomerView {
             System.out.println("\t  Corrupt Bank :: Modulo Clientes :: Lista Cliente");
             System.out.println("+----------------------------------------------------------------+\n");
         }
+
+        CommandLineTable st = new CommandLineTable();
+        st.setShowVerticalLines(true);
+
+        st.setHeaders("ID", "CLIENTE");
+        customers.forEach(customer ->
+                st.addRow(customer.getId().toString(), customer.getName())
+        );
+        st.print();
 
         if (optionEdithOrDelete != null && !optionEdithOrDelete.isEmpty())
             paginator.set(paginator.size() - 2, optionEdithOrDelete);
