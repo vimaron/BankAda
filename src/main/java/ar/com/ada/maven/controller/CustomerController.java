@@ -22,12 +22,18 @@ public class CustomerController {
                     break;
                 case 2:
                     createNewCustomer();
+                    break;
                 case 3:
                     edithCustomer();
+                    break;
                 case 4:
                     deleteCustomer();
+                    break;
+                case 5:
+                    bool = true;
+                    break;
                 default:
-                    System.out.println("Se debe seleccionar una opcion valida");
+                    MainView.invalidData();
             }
 
         }

@@ -21,9 +21,15 @@ public class TransactionController {
     private static TransactionTypeDAO transactionTypeDAO = new TransactionTypeDAO();
 
 
+<<<<<<< HEAD
     public static void createNewTransaction(){
+=======
+
+    private static void createNewTransaction(){
+>>>>>>> Transaction
         Date today = new Date();
         String trasactionType = view.getTransactionType();
+
 
         if (trasactionType == "1") {
 

@@ -11,7 +11,7 @@ import java.util.List;
 public class CustomerDAO implements Dao<CustomerDTO> {
 
     private Boolean willCloseConnection = true;
-    
+
     public CustomerDAO() {}
 
     public CustomerDAO (Boolean willCloseConnection) {
