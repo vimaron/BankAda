@@ -54,6 +54,60 @@ public class BranchView {
 
         return ScannerSingleton.getInputString();
     }
+     
+    static int listBranchsPerPageForCode(String optionSelectEdithOrDelete, boolean showHeader) {
+        int limit = 4, currentPage = 0, totalBranchs, totalPages, branchCodeSelected = 0;
+        List<BranchDTO> branchs;
+        List<String> paginator;
+        boolean shouldGetOut = false;
+
+        while (!shouldGetOut) {
+            totalBranchs = branchDAO.getTotalBranchs();
+            totalPages = (int) Math.ceil((double) totalBranchs / limit);
+            paginator = Paginator.buildPaginator(currentPage, totalPages);
+
+            branchs = branchDAO.findAll(limit, currentPage * limit);
+            String choice = view.printBranchsPerPage(branchs, paginator, optionSelectEdithOrDelete, showHeader);
+
+            switch (choice) {
+                case "i":
+                case "I":
+                    currentPage = 0;
+                    break;
+                case "a":
+                case "A":
+                    if (currentPage > 0) currentPage--;
+                    break;
+                case "s":
+                case "S":
+                    if (currentPage + 1 < totalPages) currentPage++;
+                    break;
+                case "u":
+                case "U":
+                    currentPage = totalPages - 1;
+                    break;
+                case "e":
+                case "E":
+                    if (optionSelectEdithOrDelete != null) {
+                        branchCodeSelected = view.branchCodeSelected(optionSelectEdithOrDelete);
+                        shouldGetOut = true;
+                    }
+                    break;
+                case "q":
+                case "Q":
+                    shouldGetOut = true;
+                    break;
+                default:
+                    if (choice.matches("^-?\\d+$")) {
+                        int page = Integer.parseInt(choice);
+                        if (page > 0 && page <= totalPages) currentPage = page - 1;
+                    } else MainView.chooseValidOption();
+            }
+
+        }
+        return branchCodeSelected;
+    }
+
 
     public void choiceBankIdInfo() {
         System.out.println("Seleccione de la siguiente lista, el banco al que pertenece la sucursal");
@@ -150,6 +204,24 @@ public class BranchView {
                 break;
         }
         System.out.println("Ingrese el numero de ID de la sucursal para " + actionOption + " ó 0 para cancelar: \n");
+
+        return Integer.valueOf( ScannerSingleton.getInputInteger());
+    }
+
+
+     public Integer branchCodeSelected(String actionOption) {
+        switch (actionOption) {
+            case Paginator.EDITH:
+                actionOption = "editar";
+                break;
+            case Paginator.DELETE:
+                actionOption = "eliminar";
+                break;
+            case Paginator.SELECT:
+                actionOption = "elejir";
+                break;
+        }
+        System.out.println("Ingrese el código de la sucursal para " + actionOption + " ó 0 para cancelar: \n");
 
         return Integer.valueOf( ScannerSingleton.getInputInteger());
     }
