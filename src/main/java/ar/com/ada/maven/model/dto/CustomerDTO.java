@@ -1,5 +1,6 @@
 package ar.com.ada.maven.model.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ public class CustomerDTO {
     private String lastName;
     private String identificationType;
     private Integer identification;
-    private List<AccountDTO> accounts;
+    private List<AccountDTO> accounts = new ArrayList<>();
 
     public List<AccountDTO> getAccounts() {
         return accounts;

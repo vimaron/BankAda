@@ -225,11 +225,11 @@ public class AccountDAO implements Dao<AccountDTO> {
                 CustomerDTO customer = customerDAO.findById(rs.getInt("Customer_id"));
                 AccountTypeDTO accountType = accountTypeDAO.findById(rs.getInt("AccountType_id"));
                 BranchDTO branch = branchDAO.findById(rs.getInt("Branch_id"));
-                AccountDTO account = new AccountDTO(rs.getInt("id"), rs.getInt("number"),
+                AccountDTO account = new AccountDTO(rs.getInt("id"), rs.getString("number"),
                         rs.getDouble("balance"), rs.getString("iban"), customer, accountType, branch);
 
                 accounts.add(account);
-            }
+
             connection.close();
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             System.out.println("CONNECTION ERROR: " + e.getMessage());

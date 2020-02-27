@@ -11,7 +11,6 @@ import java.util.List;
 
 public class CustomerDAO implements Dao<CustomerDTO> {
 
-    private AccountDAO accountDAO = new AccountDAO(false);
     private Boolean willCloseConnection = true;
 
     public CustomerDAO() {}
@@ -24,13 +23,16 @@ public class CustomerDAO implements Dao<CustomerDTO> {
     public ArrayList<CustomerDTO> findAll() {
         String sql = "SELECT * FROM Customer";
         ArrayList<CustomerDTO> customers = new ArrayList<>();
+        AccountDAO accountDAO = new AccountDAO(false);
         try {
             Connection connection = DBConnection.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 List<AccountDTO> accounts = accountDAO.findByCustomerId(rs.getInt("id"));
-                CustomerDTO customer = new CustomerDTO(rs.getInt("id"), rs.getString("name"), rs.getString("last_name"), rs.getString("identificationType"),  rs.getInt("identification"));
+                CustomerDTO customer = new CustomerDTO(rs.getInt("id"), rs.getString("name"),
+                        rs.getString("last_name"), rs.getString("identificationType"),
+                        rs.getInt("identification"));
                 customer.setAccounts(accounts);
                 customers.add(customer);
             }
