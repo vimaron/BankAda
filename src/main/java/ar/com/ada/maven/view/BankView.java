@@ -154,6 +154,23 @@ public class BankView {
         return Integer.valueOf( ScannerSingleton.getInputInteger());
     }
 
+    public Integer branchCodeSelected(String actionOption) {
+        switch (actionOption) {
+            case Paginator.EDITH:
+                actionOption = "editar";
+                break;
+            case Paginator.DELETE:
+                actionOption = "eliminar";
+                break;
+            case Paginator.SELECT:
+                actionOption = "elejir";
+                break;
+        }
+        System.out.println("Ingrese el còdigo de la sucursal para " + actionOption + " ó 0 para cancelar: \n");
+
+        return Integer.valueOf( ScannerSingleton.getInputInteger());
+    }
+
 
         public Boolean getResponseToDelete(BankDTO bankDTO) {
             System.out.print("Se Eliminará el siguiente banco: ");

@@ -154,6 +154,23 @@ public class BranchView {
         return Integer.valueOf( ScannerSingleton.getInputInteger());
     }
 
+    public Integer branchCodeSelected(String actionOption) {
+        switch (actionOption) {
+            case Paginator.EDITH:
+                actionOption = "editar";
+                break;
+            case Paginator.DELETE:
+                actionOption = "eliminar";
+                break;
+            case Paginator.SELECT:
+                actionOption = "elejir";
+                break;
+        }
+        System.out.println("Ingrese el código de la sucursal para " + actionOption + " ó 0 para cancelar: \n");
+
+        return Integer.valueOf( ScannerSingleton.getInputInteger());
+    }
+
     public Boolean getResponseToDelete(BranchDTO branch) {
         System.out.print("Se Eliminará la siguiente sucursal: ");
         System.out.println(Ansi.PURPLE + branch.getId() + " " + branch.getIdentificationCode() + " " + branch.getName() + Ansi.RESET);

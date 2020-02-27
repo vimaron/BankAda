@@ -65,7 +65,7 @@ public class TransactionDAO {
     }
 
     public Boolean save(TransactionDTO transactionDTO) {
-        String sql = "INSERT INTO Transaction (date, amount, Account_id, Transaction_Type ) values (?, ?, ?, ?)";
+        String sql = "INSERT INTO Transaction (date, amount, Account_id, Transaction_type_id ) values (?, ?, ?, ?)";
         int affectatedRows = 0;
         try {
             Connection connection = DBConnection.getConnection();

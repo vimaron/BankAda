@@ -76,7 +76,7 @@ public class AccountController {
         }
 
         view.choiceBranchCodeInfo();
-        Integer branchCode = BranchController.listBranchsPerPage(Paginator.SELECT, false);
+        Integer branchCode = BranchController.listBranchsPerPageForCode(Paginator.SELECT, false);
 
 
         preIban = codeCountry +

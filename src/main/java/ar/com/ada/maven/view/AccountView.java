@@ -33,9 +33,9 @@ public class AccountView {
 
     public String printCustomerPerPage(List<AccountDTO> accounts, List<String> paginator, String optionEdithOrDelete, boolean showHeader) {
         if (showHeader) {
-            System.out.println("\n+----------------------------------------+");
+            System.out.println("\n+----------------------------------------------------------------+");
             System.out.println("\t\t BANK ADA APP :: Modulo Cuentas :: Lista de Cuentas");
-            System.out.println("+----------------------------------------+\n");
+            System.out.println("+----------------------------------------------------------------+\n");
         }
 
         CommandLineTable st = new CommandLineTable();
@@ -82,7 +82,7 @@ public class AccountView {
     }
 
     public void choiceBranchCodeInfo() {
-        System.out.println("Escriba de la siguiente lista, el codigo de la sucursal al que pertenece la cuenta");
+        System.out.println("Escriba [E] para elegir y presione Enter. A continuacion escriba de la siguiente lista, el codigo de la sucursal al que pertenece la cuenta");
         ScannerSingleton.pressEnterKeyToContinue();
     }
     public void choiceBankCodeInfo() {

@@ -41,7 +41,7 @@ public class TransactionDTO {
     public AccountDTO getAccountID(){return accountID;}
     public void setAccountID(AccountDTO accountID){this.accountID=accountID;}
     public TransactionTypeDTO getTransactionTypeID(){return transactionTypeID;}
-    public void setTransactionTypeID(TransactionDTO transactionDTO){this.transactionTypeID=transactionTypeID;}
+    public void setTransactionTypeID(TransactionTypeDTO transactionTypeDTO){this.transactionTypeID=transactionTypeID;}
 
     @Override
     public String toString() {
