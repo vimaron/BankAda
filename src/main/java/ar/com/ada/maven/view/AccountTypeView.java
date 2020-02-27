@@ -59,7 +59,7 @@ public class AccountTypeView {
     public String printAccountsTypePerPage(List<AccountTypeDTO> accountsType, List<String> paginator, String optionEdithOrDelete, boolean showHeader) {
         if (showHeader) {
             System.out.println("\n+----------------------------------------------------------------+");
-            System.out.println("\t  Zoo Wolrd App :: Modulo Continente :: Lista Continente");
+            System.out.println("\t  Zoo Ada Bank :: Modulo tipo de cuentas :: Lista tipo de cuentas");
             System.out.println("+----------------------------------------------------------------+\n");
         }
 
@@ -103,7 +103,7 @@ public class AccountTypeView {
         System.out.print("Se actualizará el nombre del siguiente tipo de cuenta: ");
         System.out.println(Ansi.PURPLE + accountTypeDTO.getId() + "\t" + accountTypeDTO.getName() + Ansi.RESET);
 
-        System.out.print("Ingrese el nombre del continente para actualizar ");
+        System.out.print("Ingrese el nombre del tipo de cuenta para actualizar ");
         System.out.println("(para cancelar, no ingresar datos y presionar enter):\n");
 
         return ScannerSingleton.getInputString();
