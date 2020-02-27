@@ -49,9 +49,9 @@ public class AccountView {
                         accountDTO.getNumber(),
                         String.valueOf(accountDTO.getBalance()),
                         accountDTO.getIban(),
-                        accountDTO.getCustomerID().toString(),
-                        accountDTO.getAccountTypeID().toString(),
-                        accountDTO.getBranchID().toString())
+                        accountDTO.getCustomerID().getIdentification().toString(),
+                        accountDTO.getAccountTypeID().getName(),
+                        accountDTO.getBranchID().getName())
 
         );
         st.print();
@@ -67,22 +67,22 @@ public class AccountView {
     }
 
     public void choiceCustomerIdInfo() {
-        System.out.println("Seleccione de la siguiente lista, el cliente al que pertenece la cuenta");
+        System.out.println("Escriba [E] para elegir de la siguiente lista, el cliente al que pertenece la cuenta");
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
     public void choiceAccountTypeIdInfo() {
-        System.out.println("Seleccione de la siguiente lista, el Id del tipo de cuenta al que pertenece la cuenta");
+        System.out.println("Escriba [E] para elegir de la siguiente lista el tipo de cuenta al que pertenece la cuenta");
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
     public void choiceBranchIdInfo() {
-        System.out.println("Seleccione de la siguiente lista, el Id de la sucursal al que pertenece la cuenta");
+        System.out.println("Escriba [E] para elegir de la  siguiente lista la sucursal a la que pertenece la cuenta");
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
     public void choiceBranchCodeInfo() {
-        System.out.println("Escriba [E] para elegir y presione Enter. A continuacion escriba de la siguiente lista, el codigo de la sucursal al que pertenece la cuenta");
+        System.out.println("Escriba [E] para elegir un código de sucursal ");
 
         ScannerSingleton.pressEnterKeyToContinue();
     }

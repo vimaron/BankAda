@@ -76,7 +76,7 @@ public class BranchController {
     }
 
     static int listBranchsPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
-        int limit = 4, currentPage = 0, totalBranchs, totalPages, bankIdSelected = 0;
+        int limit = 4, currentPage = 0, totalBranchs, totalPages, branchIdSelected = 0;
         List<BranchDTO> branchs;
         List<String> paginator;
         boolean shouldGetOut = false;
@@ -109,7 +109,7 @@ public class BranchController {
                 case "e":
                 case "E":
                     if (optionSelectEdithOrDelete != null) {
-                        bankIdSelected = view.bankIdSelected(optionSelectEdithOrDelete);
+                        branchIdSelected = view.branchIdSelected(optionSelectEdithOrDelete);
                         shouldGetOut = true;
                     }
                     break;
@@ -125,7 +125,7 @@ public class BranchController {
             }
 
         }
-        return bankIdSelected;
+        return branchIdSelected;
     }
 
     static int listBranchsPerPageForCode(String optionSelectEdithOrDelete, boolean showHeader) {
