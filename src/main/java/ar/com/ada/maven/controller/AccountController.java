@@ -51,7 +51,9 @@ public class AccountController {
     }
 
     private static void listAllAccounts() {
-        listAccountsPerPage(null, true);
+        view.selectdAccount();
+        listAccountsPerPage(Paginator.SELECT, false);
+
     }
 
     private static void createNewAccount() {
@@ -117,7 +119,7 @@ public class AccountController {
     public static int listAccountsPerPage(String optionSelectEdithOrDelete, boolean showHeader) {
 
 
-        int limit = 4, currentPage = 0, totalAccounts, totalPages, customerIdSelected = 0;
+        int limit = 4, currentPage = 0, totalAccounts, totalPages, accountdSelected = 0;
         List<AccountDTO> accounts;
         List<String> paginator;
         boolean shouldGetOut = false;
@@ -150,7 +152,7 @@ public class AccountController {
                 case "e":
                 case "E":
                     if (optionSelectEdithOrDelete != null) {
-                        customerIdSelected = view.customerIdSelected(optionSelectEdithOrDelete);
+                        accountdSelected = view.accountIdSelected(optionSelectEdithOrDelete);
                         shouldGetOut = true;
                     }
                     break;
@@ -166,7 +168,7 @@ public class AccountController {
             }
 
         }
-        return customerIdSelected;
+        return accountdSelected;
     }
 
     private static AccountDTO getAccountToDelete(String optionDelete) {

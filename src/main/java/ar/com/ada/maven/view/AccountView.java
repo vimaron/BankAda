@@ -15,17 +15,18 @@ public class AccountView {
     private Scanner keyboard = ScannerSingleton.getInstance();
 
     public Integer accountMenuSelectedOption() {
-        System.out.println("\n+----------------------------------------+");
+        System.out.println("\n+-------------------------------------------------+");
         System.out.println("\t\t BANK ADA APP :: Modulo Cuentas");
-        System.out.println("+----------------------------------------+\n");
+        System.out.println("+-------------------------------------------------+\n");
 
         System.out.println("Seleccione una acción del menú:\n");
+        System.out.println("---------------------------------------------");
         System.out.println("| 1 | Listar cuentas");
         System.out.println("| 2 | Agregar nueva cuenta"); //preguntar si conviene mostrar agregar
         System.out.println("| 3 | Eliminar cuenta");
         System.out.println("| 4 | Agregar nueva transaccciòn de cuenta");
         System.out.println("| 5 | Regresar al menú principal");
-        System.out.println("-------------------------\n");
+        System.out.println("---------------------------------------------\n");
 
         return Integer.valueOf(ScannerSingleton.getInputInteger());
 
@@ -111,6 +112,11 @@ public class AccountView {
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
+    public void selectdAccount() {
+        System.out.println("¿Desea seleccionar una cuenta y ver sus movimientos?");
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+
     public void accountNotExist(int id) {
         System.out.println("No existe una cuenta con este id " + id + " asociado");
         System.out.println("Selecciones un ID valido o 0 para cancelar");
@@ -158,6 +164,23 @@ public class AccountView {
         return Integer.valueOf( ScannerSingleton.getInputInteger());
     }
 
+    public Integer accountIdSelected(String actionOption) {
+        switch (actionOption) {
+            case Paginator.EDITH:
+                actionOption = "editar";
+                break;
+            case Paginator.DELETE:
+                actionOption = "eliminar";
+                break;
+            case Paginator.SELECT:
+                actionOption = "elejir";
+                break;
+        }
+        System.out.println("Ingrese el numero de ID de la cuenta para " + actionOption + " ó 0 para cancelar: \n");
+
+        return Integer.valueOf( ScannerSingleton.getInputInteger());
+    }
+
     public Boolean getResponseToDelete(AccountDTO account) {
         System.out.print("Se Eliminará la siguiente cuenta: ");
         System.out.println(Ansi.PURPLE + account.getId() + " " + account.getIban() + " " + account.getCustomerID().getName() + Ansi.RESET);
@@ -195,4 +218,6 @@ public class AccountView {
         System.out.println("Ha cancelado la eliminacion de la cuenta");
         ScannerSingleton.pressEnterKeyToContinue();
     }
+
+
 }
