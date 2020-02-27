@@ -82,7 +82,7 @@ public class AccountView {
     }
 
     public void choiceBranchCodeInfo() {
-        System.out.println("Escriba de la siguiente lista, el codigo de la sucursal al que pertenece la cuenta");
+        System.out.println("Escriba [E] para elegir una sucursal y presione ENTER. A continuación, escriba el codigo de la sucursal al que pertenece la cuenta");
         ScannerSingleton.pressEnterKeyToContinue();
     }
     public void choiceBankCodeInfo() {
