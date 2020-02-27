@@ -134,7 +134,7 @@ public class AccountTypeDAO implements Dao<AccountTypeDTO> {
     }
 
     public int getTotalAccountsType() {
-        String sql = "SELECT COUNT(*) AS total FROM Account-type";
+        String sql = "SELECT COUNT(*) AS total FROM Account_type";
         int total = 0;
         try {
             Connection connection = DBConnection.getConnection();
