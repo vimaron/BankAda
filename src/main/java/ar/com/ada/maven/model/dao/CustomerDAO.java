@@ -1,6 +1,7 @@
 package ar.com.ada.maven.model.dao;
 
 import ar.com.ada.maven.model.DBConnection;
+import ar.com.ada.maven.model.dto.AccountDTO;
 import ar.com.ada.maven.model.dto.CustomerDTO;
 
 import java.sql.*;
@@ -22,12 +23,17 @@ public class CustomerDAO implements Dao<CustomerDTO> {
     public ArrayList<CustomerDTO> findAll() {
         String sql = "SELECT * FROM Customer";
         ArrayList<CustomerDTO> customers = new ArrayList<>();
+        AccountDAO accountDAO = new AccountDAO(false);
         try {
             Connection connection = DBConnection.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                CustomerDTO customer = new CustomerDTO(rs.getInt("id"), rs.getString("name"), rs.getString("last_name"), rs.getString("identificationType"),  rs.getInt("identification"));
+                List<AccountDTO> accounts = accountDAO.findByCustomerId(rs.getInt("id"));
+                CustomerDTO customer = new CustomerDTO(rs.getInt("id"), rs.getString("name"),
+                        rs.getString("last_name"), rs.getString("identificationType"),
+                        rs.getInt("identification"));
+                customer.setAccounts(accounts);
                 customers.add(customer);
             }
             connection.close();

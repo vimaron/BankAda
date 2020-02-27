@@ -167,7 +167,8 @@ public class CustomerController {
 
     private static void deleteSelectedCustomer(int id) {
         CustomerDTO customer = customerDAO.findById(id);
-        if (customer != null) {
+
+        if (customer != null && customer.getAccounts().isEmpty()) {
             Integer toDelete = view.getResponseToDelete(customer);
             if (toDelete == 1) {
 
