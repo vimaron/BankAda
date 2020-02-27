@@ -60,6 +60,9 @@ public class AccountController {
         String preIban = " ";
         String dc1 = "00";
         String dc = "00";
+        String codeCountry = "AR";
+        String codeBank = "9273";
+
 
 
 
@@ -72,11 +75,13 @@ public class AccountController {
             newNumber = AccountController.padLeftZeros(newNumber, 10);
         }
 
+        view.choiceBranchCodeInfo();
+        Integer branchCode = BranchController.listBranchsPerPage(Paginator.SELECT, false);
 
-        preIban = account.getBranchID().getBankID().getCountryID().getCode() +
-                account.getBranchID().getBankID().getCountryID().getCode() + dc +
-                account.getBranchID().getBankID().getCode() +
-                account.getBranchID().getIdentificationCode() + dc1 + newNumber;
+
+        preIban = codeCountry +
+                 dc +
+                codeBank + branchCode + dc1 + newNumber;
 
         view.choiceCustomerIdInfo();
 
