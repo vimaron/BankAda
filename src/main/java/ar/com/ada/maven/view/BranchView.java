@@ -55,6 +55,8 @@ public class BranchView {
         return ScannerSingleton.getInputString();
     }
 
+
+
     public void choiceBankIdInfo() {
         System.out.println("Seleccione de la siguiente lista, el banco al que pertenece la sucursal");
         ScannerSingleton.pressEnterKeyToContinue();
@@ -154,7 +156,9 @@ public class BranchView {
         return Integer.valueOf( ScannerSingleton.getInputInteger());
     }
 
+
     public Integer branchCodeSelected(String actionOption) {
+
         switch (actionOption) {
             case Paginator.EDITH:
                 actionOption = "editar";
