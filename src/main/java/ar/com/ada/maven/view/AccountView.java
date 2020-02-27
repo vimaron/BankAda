@@ -26,7 +26,7 @@ public class AccountView {
         System.out.println("| 4 | Agregar nueva transaccciòn de cuenta");
         System.out.println("| 5 | Regresar al menú principal");
         System.out.println("-------------------------\n");
-        
+
         return Integer.valueOf(ScannerSingleton.getInputInteger());
 
     }

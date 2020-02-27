@@ -41,7 +41,7 @@ public class BranchView {
 
         st.setHeaders("ID", "CODIGO", "SUCURSAL", "BANCO");
         branchs.forEach(branchDTO ->
-                st.addRow(branchDTO.getId().toString(), branchDTO.getIdentificationCode(), branchDTO.getName(), branchDTO.getBankID().toString())
+                st.addRow(branchDTO.getId().toString(), branchDTO.getIdentificationCode(), branchDTO.getName(), "SANTANDER")
         );
         st.print();
 
