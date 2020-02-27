@@ -84,9 +84,10 @@ public class AccountController {
                 codeBank + branchCode + dc1 + newNumber;
 
         view.choiceCustomerIdInfo();
-
         Integer customerId = CustomerController.listCustomersPerPage(Paginator.SELECT, false);
+        view.choiceAccountTypeIdInfo();
         Integer accountTypeId = AccountTypeController.listAccountsTypePerPage(Paginator.SELECT, false);
+        view.choiceBranchIdInfo();
         Integer branchId = BranchController.listBranchsPerPage(Paginator.SELECT, false);
 
         if (customerId != 0 && accountTypeId != 0 && branchId != 0) {

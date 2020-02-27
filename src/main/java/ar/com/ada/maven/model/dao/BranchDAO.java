@@ -41,7 +41,7 @@ public class BranchDAO {
 
 
     public BranchDTO findById(Integer id) {
-        String sql = "SELECT FROM Branch WHERE id = ?";
+        String sql = "SELECT * FROM Branch WHERE id = ?";
         BranchDTO branch = null;
 
         try {
@@ -51,7 +51,7 @@ public class BranchDAO {
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()){
                 BankDTO bank = bankDAO.findById(rs.getInt("Bank_id"));
-                branch = new BranchDTO(rs.getInt("id"), rs.getString("identificationCode"),
+                branch = new BranchDTO(rs.getInt("id"), rs.getString("identification_code"),
                         rs.getString("name"), bank);
             } if (willCloseConection){
                 connection.close();
@@ -155,7 +155,7 @@ public class BranchDAO {
     }
 
     public BranchDTO findByIdentificationCode(String identificationCode) {
-        String sql = "SELECT * FROM Branch WHERE identification_Code = ?";
+        String sql = "SELECT * FROM Branch WHERE identification_code = ?";
         BranchDTO branch = null;
         try {
             Connection connection = DBConnection.getConnection();
@@ -164,7 +164,7 @@ public class BranchDAO {
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 BankDTO bank = bankDAO.findById(rs.getInt("Bank_id"));
-                branch = new BranchDTO(rs.getInt("id"), rs.getString("identification_Code"), rs.getString("name"), bank);
+                branch = new BranchDTO(rs.getInt("id"), rs.getString("identification_code"), rs.getString("name"), bank);
             }
 
             if (willCloseConection) connection.close();

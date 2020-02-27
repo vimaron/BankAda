@@ -71,10 +71,16 @@ public class AccountView {
         ScannerSingleton.pressEnterKeyToContinue();
     }
 
-    public void choiceCountryCodeInfo() {
-        System.out.println("Escriba de la siguiente lista, el còdigo del país al que pertenece la cuenta");
+    public void choiceAccountTypeIdInfo() {
+        System.out.println("Seleccione de la siguiente lista, el Id del tipo de cuenta al que pertenece la cuenta");
         ScannerSingleton.pressEnterKeyToContinue();
     }
+
+    public void choiceBranchIdInfo() {
+        System.out.println("Seleccione de la siguiente lista, el Id de la sucursal al que pertenece la cuenta");
+        ScannerSingleton.pressEnterKeyToContinue();
+    }
+
     public void choiceBranchCodeInfo() {
         System.out.println("Escriba de la siguiente lista, el codigo de la sucursal al que pertenece la cuenta");
         ScannerSingleton.pressEnterKeyToContinue();
@@ -99,7 +105,7 @@ public class AccountView {
 
     public void showNewAccount(String iban) {
         System.out.println(Ansi.GREEN);
-        System.out.println("La cuenta se ha creado exitosamente" + iban);
+        System.out.println("La cuenta se ha creado exitosamente :: CODE IBAN : " + iban);
         System.out.println(Ansi.RESET);
         ScannerSingleton.pressEnterKeyToContinue();
     }

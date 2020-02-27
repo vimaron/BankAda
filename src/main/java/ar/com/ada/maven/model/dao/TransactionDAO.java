@@ -31,7 +31,7 @@ public class TransactionDAO {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 AccountDTO account = accountDAO.findById(rs.getInt("Account_id"));
-                TransactionTypeDTO transactionType = transactionTypeDAO.findById(rs.getInt("Transaction_Type"));
+                TransactionTypeDTO transactionType = transactionTypeDAO.findById(rs.getInt("Transaction_Type_id"));
                 TransactionDTO transaction = new TransactionDTO(rs.getInt("id"), rs.getDate("date"), rs.getDouble("amount"), account, transactionType);
                 transactions.add(transaction);
             }
@@ -52,9 +52,10 @@ public class TransactionDAO {
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 AccountDTO account = accountDAO.findById(rs.getInt("Account_id"));
-                TransactionTypeDTO transactionType = transactionTypeDAO.findById(rs.getInt("Transaction_Type"));
+                TransactionTypeDTO transactionType = transactionTypeDAO.findById(rs.getInt("Transaction_Type_id"));
                 transaction = new TransactionDTO(rs.getInt("id"), rs.getDate("date"), rs.getDouble("amount"), account, transactionType);
-            } if (willCloseConnection)
+            }
+            if (willCloseConnection)
                 connection.close();
         } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
             ex.printStackTrace();
@@ -81,4 +82,28 @@ public class TransactionDAO {
         }
         return affectatedRows == 1;
     }
+
+    public ArrayList<TransactionDTO> findAll(int limit, int offset) {
+        String sql = "SELECT * FROM Transaction LIMIT ? OFFSET ?";
+        ArrayList<TransactionDTO> transactions = new ArrayList<>();
+        try {
+            Connection connection = DBConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, limit);
+            preparedStatement.setInt(2, offset);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                AccountDTO account = accountDAO.findById(rs.getInt("Account_id"));
+                TransactionTypeDTO transactionType = transactionTypeDAO.findById(rs.getInt("Transaction_Type_id"));
+                TransactionDTO transaction = new TransactionDTO(rs.getInt("id"), rs.getDate("date"), rs.getDouble("amount"), account, transactionType);
+                transactions.add(transaction);
+            }
+            connection.close();
+        } catch (Exception e) {
+            System.out.println("CONNECTION ERROR: " + e.getMessage());
+        }
+
+        return transactions;
+    }
+
 }
